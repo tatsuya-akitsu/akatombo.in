@@ -86,6 +86,7 @@ dist
 .firebaserc
 database.rules.json
 firebase.json
+firestore.indexex.json
 firestore.rules
 storage.rules
 
