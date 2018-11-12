@@ -1,0 +1,93 @@
+/* ======================================== */
+  /* variables */
+/* ======================================== */
+// ---------------- Base Color ------------------------- //
+$color-white: #ffffff;
+$color-black: #3e3e3e;
+$color-primary: #00729D;
+$color-secondary: #3FA9AC;
+
+
+// ---------------- Base Font ------------------------- //
+$font-init: "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", "ＭＳ Ｐゴシック", "MS PGothic", "arial", "helvetica", sans-serif;
+$asap : 'Asap', sans-serif;
+
+
+// ---------------- Base Content ------------------------- //
+$max-width: 1200px;
+$easeInOutQuart: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
+
+// -------------------------------------
+//   Block Content
+// -------------------------------------
+// -------------------------------------
+//   Inline Content
+// -------------------------------------
+
+a {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+a,
+button {
+  transition: all .3s linear;
+}
+
+select {
+  appearance: none;
+  background: none transparent;
+  border: 0;
+  border-radius: 0;
+  box-sizing: content-box;
+  color: inherit;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+img {
+  vertical-align: bottom;
+}
+
+input,
+label,
+select,
+textarea {
+  vertical-align: middle;
+}
+
+//ボタンのデフォルトcssリセット
+button {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

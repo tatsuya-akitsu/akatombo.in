@@ -1,0 +1,17 @@
+.wrapper {
+  @include inner();
+}
+
+.section {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+
+  @include mobile-window {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.inner {
+  padding-top: 3rem;
+}

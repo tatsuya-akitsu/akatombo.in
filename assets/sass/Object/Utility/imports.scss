@@ -1,0 +1,12 @@
+.is-pc {
+  @include mobile-window() {
+    display: none;
+  }
+}
+
+.is-sp {
+  display: none;
+  @include mobile-window() {
+    display: block;
+  }
+}
