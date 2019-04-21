@@ -1,62 +1,45 @@
 <template>
-  <header 
+  <header
     class="header">
-    <div 
-      v-if="!$store.state.isLoggined && $store.state.route === 'top'" 
-      class="header__inner">
-      <nav>
-        <ul>
-          <li><a @click="show = !show">PROJECT</a></li>
-          <li><a @click="$router.push('/about')">ABOUT</a></li>
-        </ul>
-      </nav>
-      <transition name="fade">
-        <app-mega-menu v-if="show" />
-      </transition>
-    </div>
-    <div 
-      v-else-if="$store.state.isLoggined" 
-      class="header__inner header__inner--loggined">
-      <a 
-        class="logo" 
+    <div class="header__inner">
+      <a
+        v-if="pageRoute !== 'top' || pageRoute !== 'login'"
+        class="logo"
         @click="$router.push('/')">
-        <img 
-          src="/img/logo--black.svg" 
+        <img
+          src="/img/logo--black.svg"
           alt="">
       </a>
-      <nav>
-        <ul>
-          <li><a @click="dashboard">DASHBOARD</a></li>
-          <li><a @click="logout">LOGOUT</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div 
-      v-else-if="$store.state.route === 'illustrator' || $store.state.route === 'Photoshop' || $store.state.route === 'lightroom' || $store.state.route === 'web' || $store.state.route === 'client' || $store.state.route === 'about'" 
-      class="header__inner header__inner--loggined">
-      <a 
-        class="logo" 
-        @click="$router.push('/')">
-        <img 
-          src="/img/logo--black.svg" 
-          alt="">
-      </a>
-      <nav>
-        <ul>
-          <li><a @click="show = !show">PROJECT</a></li>
-          <li><a href="#">ABOUT</a></li>
-        </ul>
-      </nav>
-      <transition name="fade">
-        <app-mega-menu v-if="show" />
-      </transition>
+      <template v-if="pageRoute !== 'login' || pageRoute !== 'dashboard'">
+        <nav>
+          <ul>
+            <li
+              class="megamenu_list"
+              @click="show = !show"><a>PROJECT</a>
+              <transition name="fade">
+                <app-mega-menu v-if="show" />
+              </transition>
+            </li>
+            <li><a @click="$router.push('/about')">ABOUT</a></li>
+          </ul>
+        </nav>
+      </template>
+      <template v-else-if="pageRoute === 'dashboard'">
+        <nav>
+          <ul>
+            <li><a @click="dashboard">DASHBOARD</a></li>
+            <li><a @click="logout">LOGOUT</a></li>
+          </ul>
+        </nav>
+      </template>
     </div>
   </header>
 </template>
 
 <script>
 import AppMegaMenu from '~/components/MegaMenu'
-import firebase from '@/plugins/firebase.js'
+import { T as G } from '../store/global/types'
+import { mapGetters } from 'vuex'
 
 export default {
   components: { AppMegaMenu },
@@ -65,27 +48,20 @@ export default {
       show: false
     }
   },
-  updated() {
-    if (this.$store.state.isLoggined === true) {
-      this.name = firebase.auth().currentUser.displayName
-      this.photoUrl = firebase.auth().currentUser.photoURL
-    }
+  computed: {
+    ...mapGetters('global', {
+      myUserInfo: 'getUserInfo',
+      pageRoute: 'getPageRoute',
+      isLoggedin: 'getUserLoggedin'
+    })
   },
   methods: {
     logout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$store.commit('logout')
-          this.$router.push('/')
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      this.$store.dispatch(`global/${G.USER_LOGOUT}`)
+      this.$router.push('/')
     },
     dashboard() {
-      this.$router.push(`/dashboard/${firebase.auth().currentUser.uid}`)
+      this.$router.push(`/dashboard/${this.myUserInfo.uid}`)
     }
   }
 }
@@ -101,6 +77,7 @@ export default {
 }
 
 .header__inner {
+  position: relative;
   margin: 0 auto;
   padding: 0 5rem;
   text-align: right;
@@ -111,10 +88,6 @@ export default {
     padding: 0 1.5rem;
     max-width: 100%;
   }
-}
-
-.header__inner--loggined {
-  position: relative;
 
   .logo {
     cursor: pointer;

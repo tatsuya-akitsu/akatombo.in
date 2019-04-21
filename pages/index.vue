@@ -1,13 +1,13 @@
 <template>
   <div>
-    <section 
-      id="header" 
+    <section
+      id="header"
       class="header">
       <div class="section-header__inner">
         <div class="logo">
           <div class="logo__dragonfly">
-            <a 
-              href="https://codepen.io/tatsuya-akitsu/pen/eQdRgx" 
+            <a
+              href="https://codepen.io/tatsuya-akitsu/pen/eQdRgx"
               target="_blank">
               <span class="eye"/>
               <span class="eye"/>
@@ -51,8 +51,8 @@
         <h2 class="c-ttl--h2">ABOUT US</h2>
         <div class="inner">
           <div class="thumbnail">
-            <figure><img 
-              src="/img/profile.jpg" 
+            <figure><img
+              src="/img/profile.jpg"
               alt="" ></figure>
           </div>
           <div class="body">
@@ -74,17 +74,17 @@
       <div class="wrapper">
         <h2 class="c-ttl--h2">WORKS</h2>
         <div class="inner">
-          <app-card 
-            v-for="(work, i) in data" 
-            :key="i" 
+          <app-card
+            v-for="(work, i) in myData.default"
+            :key="i"
             :worksitem="work" />
-          <app-card 
-            v-for="(work, i) in works" 
-            :key="i" 
+          <app-card
+            v-for="(work, i) in myData.data"
+            :key="i"
             :worksitem="work" />
         </div>
-        <button 
-          class="c-button c-button--secondary" 
+        <button
+          class="c-button c-button--secondary"
           @click="$router.push('/web')">MORE WORKS</button>
       </div>
     </section>
@@ -93,7 +93,8 @@
 
 <script>
 import AppCard from '~/components/AppCard.vue'
-import firebase from '@/plugins/firebase.js'
+import { T as G } from '../store/global/types'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Top',
@@ -105,25 +106,10 @@ export default {
       title: 'Tatsuya Akitsu'
     }
   },
-  data: () => {
-    return {
-      data: [],
-      works: [
-        {
-          photo: '/img/works__img__08.svg',
-          title: 'Client works',
-          doc: '会社および、個人受託制作の実績一覧です',
-          route: '/client/login'
-        },
-        {
-          photo: '/img/works__img__09.svg',
-          title: 'More Github',
-          doc:
-            'WORKSで公開しているプロジェクトの一部や、進行中のプロジェクトをオープンソースで公開しています',
-          url: 'https://github.com/tatsuya-akitsu'
-        }
-      ]
-    }
+  computed: {
+    ...mapGetters('global', {
+      myData: 'getTopWorks'
+    })
   },
   mounted() {
     const header = document.getElementById('header')
@@ -135,19 +121,8 @@ export default {
     line.style.height = `${logo.offsetHeight}px`
   },
   created() {
-    this.$store.commit('routing', 'top')
-    let work = []
-    firebase
-      .firestore()
-      .collection('web')
-      .limit(7)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          work.push(Object.assign({ key: doc.id }, doc.data()))
-          this.data = work
-        })
-      })
+    this.$store.dispatch(`global/${G.SET_ROUTES}`, 'top')
+    this.$store.dispatch(`global/${G.AJAX_GET_TOP_WEB_WORKS}`)
     const line = document.getElementsByClassName('line')
     setTimeout(() => {
       line[0].classList.add('is-constraction')

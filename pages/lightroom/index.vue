@@ -4,9 +4,9 @@
       <div class="wrapper">
         <h2 class="c-ttl--h2">Photograph</h2>
         <div class="inner">
-          <app-image 
-            v-for="(work, i) in data" 
-            :key="i" 
+          <app-image
+            v-for="(work, i) in myWorks"
+            :key="i"
             :worksitem="work" />
         </div>
       </div>
@@ -16,7 +16,8 @@
 
 <script>
 import AppImage from '~/components/AppImage.vue'
-import firebase from '@/plugins/firebase.js'
+import { mapGetters } from 'vuex'
+import { T as G } from '../../store/global/types'
 
 export default {
   name: 'Photograph',
@@ -28,24 +29,14 @@ export default {
       title: 'Photograph'
     }
   },
-  data: () => {
-    return {
-      data: []
-    }
+  computed: {
+    ...mapGetters('global', {
+      myWorks: 'getWorksData'
+    })
   },
   created() {
-    this.$store.commit('routing', 'lightroom')
-    let work = []
-    firebase
-      .firestore()
-      .collection('Lightroom')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          work.push(Object.assign({ key: doc.id }, doc.data()))
-          this.data = work
-        })
-      })
+    this.$store.dispatch(`global/${G.SET_ROUTES}`, 'lightroom')
+    this.$store.dispatch(`global/${G.AJAX_GET_WORKS_DATA}`, 'Lightroom')
   }
 }
 </script>

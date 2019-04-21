@@ -4,9 +4,9 @@
       <div class="wrapper">
         <h2 class="c-ttl--h2">Illusration Design</h2>
         <div class="inner">
-          <app-card 
-            v-for="(work, i) in data" 
-            :key="i" 
+          <app-card
+            v-for="(work, i) in myWorks"
+            :key="i"
             :worksitem="work" />
         </div>
       </div>
@@ -16,7 +16,8 @@
 
 <script>
 import AppCard from '~/components/AppCard.vue'
-import firebase from '@/plugins/firebase.js'
+import { T as G } from '../../store/global/types'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'IllustrationDesign',
@@ -28,24 +29,14 @@ export default {
       title: 'Illustration Design'
     }
   },
-  data: () => {
-    return {
-      data: []
-    }
+  computed: {
+    ...mapGetters('global', {
+      myWorks: 'getWorksData'
+    })
   },
   created() {
-    this.$store.commit('routing', 'illustrator')
-    let work = []
-    firebase
-      .firestore()
-      .collection('Illustrator')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          work.push(Object.assign({ key: doc.id }, doc.data()))
-          this.data = work
-        })
-      })
+    this.$store.dispatch(`global/${G.SET_ROUTES}`, 'illustrator')
+    this.$store.dispatch(`global/${G.AJAX_GET_WORKS_DATA}`, 'Illustrator')
   }
 }
 </script>

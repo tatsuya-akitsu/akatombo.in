@@ -4,29 +4,29 @@
       <div class="wrapper">
         <h2>WORKS POST</h2>
         <div class="inner">
-          <form 
-            id="postForm" 
-            name="postForm" 
-            class="form" 
-            method="post" 
+          <form
+            id="postForm"
+            name="postForm"
+            class="form"
+            method="post"
             @submit.prevent="contributionPost">
             <div class="form-item">
               <label>タイトル</label>
               <div class="form-item__inner">
-                <input 
-                  v-model="title" 
-                  type="text" 
-                  name="title" 
+                <input
+                  v-model="work.title"
+                  type="text"
+                  name="title"
                   placeholder="POiDER.me">
               </div>
             </div>
             <div class="form-item">
               <label>URL</label>
               <div class="form-item__inner">
-                <input 
-                  v-model="url" 
-                  type="url" 
-                  name="url" 
+                <input
+                  v-model="work.url"
+                  type="url"
+                  name="url"
                   placeholder="https://poider.me">
               </div>
             </div>
@@ -40,9 +40,9 @@
               <label>タグ</label>
               <div class="form-item__inner">
                 <vue-tags-input
-                  v-model="workTag"
-                  :tags="workTags"
-                  @tags-changed="newTags => workTags = newTags"
+                  v-model="work.workTag"
+                  :tags="work.workTags"
+                  @tags-changed="newTags => work.workTags = newTags"
                 />
               </div>
             </div>
@@ -52,8 +52,8 @@
                 <div class="thumbnail-input__box">
                   <div class="thumbnail-input__inner">
                     <p class="thumbnail__note">
-                      <img 
-                        src="/img/icons/cloud.svg" 
+                      <img
+                        src="/img/icons/cloud.svg"
                         alt="" >
                       クリックして画像をアップロードしてください
                     </p>
@@ -71,15 +71,15 @@
               <label>制作時間</label>
               <div class="form-item__inner">
                 <span>デザイン</span>
-                <input 
-                  v-model="designTime" 
-                  type="number" 
+                <input
+                  v-model="work.times.design"
+                  type="number"
                   name="designTime">
                 <span>h</span>
                 <span>コーディング</span>
-                <input 
-                  v-model="codingTime" 
-                  type="number" 
+                <input
+                  v-model="work.times.coding"
+                  type="number"
                   name="codingTime">
                 <span>h</span>
               </div>
@@ -88,17 +88,17 @@
               <label>ツール</label>
               <div class="form-item__inner">
                 <vue-tags-input
-                  v-model="toolTag"
-                  :tags="toolTags"
-                  @tags-changed="newTags => toolTags = newTags"
+                  v-model="work.toolTag"
+                  :tags="work.toolTags"
+                  @tags-changed="newTags => work.toolTags = newTags"
                 />
               </div>
             </div>
             <div class="form-item">
               <label>カテゴリ</label>
               <div class="form-item__inner">
-                <select 
-                  v-model="category" 
+                <select
+                  v-model="work.category"
                   name="category">
                   <option value="Photoshop">Photoshop</option>
                   <option value="Illustrator">Illustrator</option>
@@ -108,8 +108,8 @@
                 </select>
               </div>
             </div>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               class="c-button c-button--primary">Post</button>
           </form>
         </div>
@@ -119,10 +119,11 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 import SimpleMDE from 'simplemde'
 import('simplemde/dist/simplemde.min.css')
 import VueTagsInput from '@johmun/vue-tags-input'
+import { mapGetters } from 'vuex'
+import { T as G } from '../../store/global/types'
 
 let editor
 
@@ -136,21 +137,14 @@ export default {
   components: {
     VueTagsInput
   },
-  data: () => {
-    return {
-      title: '',
-      url: '',
-      workTag: '',
-      workTags: [],
-      photoUrl: '',
-      designTime: '',
-      codingTime: '',
-      toolTag: '',
-      toolTags: [],
-      category: ''
-    }
+  computed: {
+    ...mapGetters('global', {
+      work: 'getRegistrationWork',
+      workThumbnail: 'getWorkThumbnail'
+    })
   },
   mounted() {
+    this.$store.dispatch(`global/${G.SET_ROUTES}`, 'dashboard')
     editor = new SimpleMDE({ element: document.getElementById('editor') })
 
     const tag = document.querySelectorAll('.input')
@@ -174,54 +168,25 @@ export default {
   methods: {
     inputThumbnail(e) {
       let files = e.target.files || e.dataTransfer.files
-      const storageRef = firebase.storage().ref()
-      var uploadRef = storageRef.child(files[0].name)
-      const f = files[0]
-      uploadRef.put(f).then(snapshot => {
-        uploadRef
-          .getDownloadURL()
-          .then(url => {
-            const thumbnail = window.document.querySelector(
-              '.thumbnail-preview__box'
-            )
-            thumbnail.style.backgroundImage = 'url(' + url + ')'
-            console.log(url)
-            this.photoUrl = url
-          })
-          .catch(err => {
-            this.errors.push(err)
-          })
-      })
-    },
-    pushTool() {
-      let tool = this.tool
-      this.tools.push(tool)
-      const toolInput = document.getElementById('tool')
-      toolInput.value = ''
+      this.$store.dispatch(`${G.AJAX_GET_WORK_THUMBNAIL}`, files)
+      const thumbnail = window.document.querySelector('.thumbnail-preview__box')
+      thumbnail.style.backgroundImage = 'url(' + this.workThumbnail + ')'
     },
     contributionPost() {
       const postdata = {
-        title: this.title,
-        url: this.url,
+        title: this.work.title,
+        url: this.work.url,
         doc: editor.value(),
-        worksTag: this.workTags,
-        photo: this.photoUrl,
-        design: this.designTime,
-        coding: this.codingTime,
-        tool: this.toolTags,
-        category: this.category
+        worksTag: this.work.worksTag,
+        photo: this.workThumbnail,
+        design: this.work.times.design,
+        coding: this.work.times.coding,
+        tool: this.work.toolTags,
+        category: this.work.category
       }
 
-      firebase
-        .firestore()
-        .collection(this.category)
-        .add(postdata)
-        .then(() => {
-          this.$router.push(`/dashboard/complete`)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.$store.commit(`global/${G.AJAX_POST_WORK_DATA}`, postdata)
+      this.$router.push(`/dashboard/complete`)
     }
   }
 }

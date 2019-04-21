@@ -1,21 +1,21 @@
 <template>
   <div>
-    <section 
-      id="login" 
+    <section
+      id="login"
       class="section login">
       <div class="wrapper">
         <h2>Login</h2>
         <figure>
-          <img 
-            src="/img/logo--black.svg" 
+          <img
+            src="/img/logo--black.svg"
             alt="">
         </figure>
         <div class="login-form">
-          <form 
-            id="loginform" 
-            name="loginform" 
-            class="form" 
-            method="post" 
+          <form
+            id="loginform"
+            name="loginform"
+            class="form"
+            method="post"
             @submit.prevent="normalLogin">
             <div class="form-item">
               <label>メールアドレス</label>
@@ -39,8 +39,8 @@
                 >
               </div>
             </div>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               class="c-button c-button--primary">Login</button>
           </form>
         </div>
@@ -51,6 +51,7 @@
 
 <script>
 import firebase from '@/plugins/firebase.js'
+import { T as G } from '../../store/global/types'
 
 export default {
   name: 'Login',
@@ -66,6 +67,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.dispatch(`global/${G.SET_ROUTES}`, 'login')
     const login = document.querySelector('.login')
     let wh = window.outerHeight
     const footer = document.getElementById('footer')
@@ -73,21 +75,11 @@ export default {
   },
   methods: {
     normalLogin() {
-      const mail = this.email
-      const password = this.password
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(mail, password)
-        .then(() => {
-          localStorage.mail = mail
-          localStorage.password = password
-          this.$store.commit('loggined')
-          this.$router.push(`/dashboard/${firebase.auth().currentUser.uid}`)
-          console.log(this.$store)
-        })
-        .catch(error => {
-          this.errors.push('ログインに失敗しました')
-        })
+      const userObj = {}
+      userObj.mail = this.email
+      userObj.password = this.password
+      this.$store.dispatch(`${G.USER_LOGGEDIN}`, userObj)
+      this.$route.push('cmnEventHandler')
     }
   }
 }

@@ -1,58 +1,58 @@
 <template>
   <div class="ordinal-card">
-    <a 
+    <a
       v-if="worksitem.url"
-      :href="worksitem.url" 
+      :href="worksitem.url"
       target="_blank">
       <div class="thumbnail">
-        <img 
-          :src="worksitem.photo" 
+        <img
+          :src="worksitem.photo"
           alt="" >
       </div>
       <div class="body">
         <p class="title">{{ worksitem.title }}</p>
         <p class="description">{{ worksitem.doc }}</p>
         <ul>
-          <li 
-            v-for="(tag, i) in worksitem.worksTag" 
+          <li
+            v-for="(tag, i) in worksitem.worksTag"
             :key="i">{{ tag.text }}</li>
         </ul>
       </div>
     </a>
-    <a 
+    <a
       v-else-if="worksitem.route"
       @click="$router.push(worksitem.route)">
       <div class="thumbnail">
-        <img 
-          :src="worksitem.photo" 
+        <img
+          :src="worksitem.photo"
           alt="" >
       </div>
       <div class="body">
         <p class="title">{{ worksitem.title }}</p>
         <p class="description">{{ worksitem.doc }}</p>
         <ul>
-          <li 
-            v-for="(tag, i) in worksitem.worksTag" 
+          <li
+            v-for="(tag, i) in worksitem.worksTag"
             :key="i">{{ tag.text }}</li>
         </ul>
       </div>
     </a>
-    <a 
+    <a
       v-else
       :index="worksitem.key"
       :category="worksitem.category"
       @click="$router.push(`/${worksitem.category}/work/${worksitem.key}`)">
       <div class="thumbnail">
-        <img 
-          :src="worksitem.photo" 
+        <img
+          :src="worksitem.photo"
           alt="" >
       </div>
       <div class="body">
         <p class="title">{{ worksitem.title }}</p>
         <p class="description">{{ worksitem.doc }}</p>
         <ul>
-          <li 
-            v-for="(tag, i) in worksitem.worksTag" 
+          <li
+            v-for="(tag, i) in worksitem.worksTag"
             :key="i">{{ tag.text }}</li>
         </ul>
       </div>
@@ -63,7 +63,7 @@
 <script>
 export default {
   props: {
-    worksitem: { type: Array, required: true }
+    worksitem: { type: Object, required: true }
   }
 }
 </script>

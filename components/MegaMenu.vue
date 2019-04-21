@@ -1,67 +1,62 @@
 <template>
-  <div 
-    class="mega-menu" 
-    @mouseover="isOpenMegaMenu">
-    <div 
-      v-for="(item, i) in items" 
-      :key="i" 
-      class="mega-menu__media">
-      <a @click="$router.push(item.href)">
-        <div class="thumbnail">
-          <img 
-            :src="item.img"
-            alt="" >
-        </div>
-        <div class="body">
-          <p class="title">{{ item.title }}</p>
-          <p class="description">{{ item.val }}</p>
-        </div>
-      </a>
+  <div class="mega-menu">
+    <div class="mega-menu__inner">
+      <div
+        v-for="(item, i) in items"
+        :key="i"
+        class="mega-menu__media">
+        <a @click="$router.push(item.href)">
+          <div class="thumbnail">
+            <img
+              :src="item.img"
+              alt="" >
+          </div>
+          <div class="body">
+            <p class="title">{{ item.title }}</p>
+            <p class="description">{{ item.val }}</p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  data: () => {
-    return {
-      items: [
-        {
-          img: '/img/illustrator/logo__img__2016.svg',
-          title: 'Illustration Design',
-          val: 'Illustratorを使用し、\nポストカードやロゴ、DMなどを制作',
-          href: '/illustrator'
-        },
-        {
-          img: '/img/photoshop/graphic__img__01.jpg',
-          title: 'Graphic Design',
-          val: 'Photoshopを使用し、DMや\n合成画像を作成',
-          href: '/photoshop'
-        },
-        {
-          img: '/img/lightroom/photo__01.jpg',
-          title: 'Photograph',
-          val: '趣味で撮影した写真をLightroomで編集',
-          href: '/lightroom'
-        }
-      ]
-    }
+  computed: {
+    ...mapGetters('global', {
+      items: 'getNavItems'
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .mega-menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: absolute;
+  top: 3.5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
   padding: 2.9rem 2rem;
   background-color: $color-white;
   box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 980px;
+
+  @include mobile-window {
+    padding: 3rem 1rem;
+  }
+}
+
+.mega-menu__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   @include mobile-window {
     display: block;
-    padding: 3rem 1rem;
   }
 }
 

@@ -1,20 +1,20 @@
 <template>
   <div>
-    <section 
-      id="complete" 
+    <section
+      id="complete"
       class="section complete">
       <div class="wrapper">
         <h2>Complete</h2>
         <figure>
-          <img 
-            src="/img/logo--black.svg" 
+          <img
+            src="/img/logo--black.svg"
             alt="">
         </figure>
         <div class="inner">
           <p>投稿が完了しました</p>
-          <button 
-            type="submit" 
-            class="c-button c-button--primary" 
+          <button
+            type="submit"
+            class="c-button c-button--primary"
             @click="dashboard">POST</button>
         </div>
       </div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import firebase from '@/plugins/firebase.js'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Complete',
@@ -31,6 +31,11 @@ export default {
     return {
       title: '投稿完了'
     }
+  },
+  computed: {
+    ...mapGetters('global', {
+      myUserInfo: 'getUserInfo'
+    })
   },
   mounted() {
     const section = document.querySelector('.complete')
@@ -40,7 +45,7 @@ export default {
   },
   methods: {
     dashboard() {
-      this.$router.push(`/dashboard/${firebase.auth().currentUser.uid}`)
+      this.$router.push(`/dashboard/${this.myUserInfo.uid}`)
     }
   }
 }

@@ -2,23 +2,23 @@
   <div>
     <section class="section article">
       <div class="wrapper">
-        <h2 class="c-ttl--h2">{{ item.title }}</h2>
+        <h2 class="c-ttl--h2">{{ myData.work.title }}</h2>
         <div class="inner">
-          <img 
-            :src="item.photo" 
+          <img
+            :src="myData.work.photo"
             alt="" >
-          <p class="description">{{ item.doc }}</p>
+          <p class="description">{{ myData.work.doc }}</p>
           <div class="article-summary">
             <div class="article-summary__box">
               <p class="title">制作時間</p>
-              <p class="hour">考案：{{ item.design }}h</p>
-              <p class="hour">デザイン：{{ item.coding }}h</p>
+              <p class="hour">考案：{{ myData.work.design }}h</p>
+              <p class="hour">デザイン：{{ myData.work.coding }}h</p>
             </div>
             <div class="article-summary__box">
               <p class="title">制作ツール</p>
               <ul class="tool">
-                <li 
-                  v-for="(tool, i) in item.tool" 
+                <li
+                  v-for="(tool, i) in myData.work.tool"
                   :key="i">{{ tool.text }}</li>
               </ul>
             </div>
@@ -27,9 +27,9 @@
         <div class="other-works">
           <h3 class="c-ttl--h3">OTHER WORKS</h3>
           <div class="other-works__inner">
-            <app-card 
-              v-for="(work, i) in data" 
-              :key="i" 
+            <app-card
+              v-for="(work, i) in myData.other"
+              :key="i"
               :worksitem="work" />
           </div>
         </div>
@@ -40,51 +40,36 @@
 
 <script>
 import AppCard from '~/components/AppCard.vue'
-import firebase from '@/plugins/firebase.js'
+import { mapGetters } from 'vuex'
+import { T as G } from '../../../store/global/types'
 
 export default {
   name: 'Post',
   head() {
     return {
-      title: `${this.item.title}`
+      title: `${this.myData.work.title}`
     }
   },
   components: {
     AppCard
   },
-  data: () => {
-    return {
-      item: {},
-      data: []
-    }
+  computed: {
+    ...mapGetters('global', {
+      myData: 'getWorkDetail'
+    })
   },
   mounted() {
-    const orderId = this.$route.params.index
-    const category = this.$route.path.split('/')[1]
-    firebase
-      .firestore()
-      .collection(category)
-      .doc(orderId)
-      .get()
-      .then(doc => {
-        this.item = doc.data()
-      })
-
-    let work = []
-    firebase
-      .firestore()
-      .collection(category)
-      .limit(3)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          work.push(Object.assign({ key: doc.id }, doc.data()))
-          this.data = work
-        })
-      })
+    const _orderObj = {}
+    _orderObj.orderId = this.$route.params.index
+    _orderObj.category = this.$route.path.split('/')[1]
+    this.$store.dispatch(`global/${G.AJAX_GET_WORKS_DETAIL_DATA}`, _orderObj)
+    this.$store.dispatch(
+      `global/${G.AJAX_GET_DETAIL_ITEMS}`,
+      this.$route.path.split('/')[1]
+    )
   },
   created() {
-    this.$store.commit('routing', 'illustrator')
+    this.$store.dispatch(`global/${G.SET_ROUTES}`, 'illustrator')
   }
 }
 </script>

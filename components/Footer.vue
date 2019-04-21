@@ -1,6 +1,6 @@
 <template>
-  <footer 
-    v-if="$store.state.route === 'top' || $store.state.route === 'illustrator' || $store.state.route === 'Photoshop' || $store.state.route === 'lightroom' || $store.state.route === 'web' || $store.state.route === 'client' || $store.state.route === 'about'" 
+  <footer
+    v-if="pageRoute !== 'dashboard' || pageRoute !== 'login'"
     id="footer"
     class="footer">
     <div class="footer__global-nav">
@@ -9,8 +9,8 @@
           <p class="title">CONTENTS</p>
           <ul>
             <li><a @click="$router.push('/about')">ABOUT<span>自己紹介</span></a></li>
-            <li><a 
-              href="https://note.mu/tombo_code" 
+            <li><a
+              href="https://note.mu/tombo_code"
               target="_blank">note<span>ノート</span></a></li>
           </ul>
         </div>
@@ -26,28 +26,40 @@
     </div>
     <div class="footer__inner">
       <ul>
-        <li><a href="https://www.facebook.com/akitsu.tatsuya"><img 
-          src="/img/icons/facebook-logo.svg" 
+        <li><a href="https://www.facebook.com/akitsu.tatsuya"><img
+          src="/img/icons/facebook-logo.svg"
           alt="" ></a></li>
-        <li><a href="https://twitter.com/Rote_libelle"><img 
-          src="/img/icons/twitter-logo-on-black-background.svg" 
+        <li><a href="https://twitter.com/Rote_libelle"><img
+          src="/img/icons/twitter-logo-on-black-background.svg"
           alt="" ></a></li>
-        <li><a href="https://www.instagram.com/sho_at/"><img 
-          src="/img/icons/instagram.svg" 
+        <li><a href="https://www.instagram.com/sho_at/"><img
+          src="/img/icons/instagram.svg"
           alt="" ></a></li>
-        <li><a href="https://github.com/tatsuya-akitsu"><img 
-          src="/img/icons/github-sign.svg" 
+        <li><a href="https://github.com/tatsuya-akitsu"><img
+          src="/img/icons/github-sign.svg"
           alt="" ></a></li>
       </ul>
       <figure class="footer__logo">
-        <img 
-          src="/img/logo.svg" 
+        <img
+          src="/img/logo.svg"
           alt="" >
       </figure>
       <p class="copyright">&copy;2018 a° </p>
     </div>
   </footer>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters('global', {
+      pageRoute: 'getPageRoute'
+    })
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .footer {

@@ -1,25 +1,28 @@
 <template>
   <div id="app">
-    <app-header v-if="$store.state.isLoading === false" />
+    <app-header v-if="!isLoading" />
     <transition name="fade">
-      <nuxt v-if="$store.state.isLoading === false" />
+      <nuxt v-if="!isLoading" />
     </transition>
-    <app-footer v-if="$store.state.isLoading === false" />
+    <app-footer v-if="!isLoading" />
   </div>
 </template>
 
 <script>
 import AppHeader from '~/components/Header'
 import AppFooter from '~/components/Footer'
+import { mapGetters } from 'vuex'
+import { T as G } from '../store/global/types'
 
 export default {
   components: { AppHeader, AppFooter },
-  beforeUpdate() {
-    if (this.$store.state.isLoading === true) {
-      setTimeout(() => {
-        this.$store.commit('outLoading')
-      }, 1000)
-    }
+  computed: {
+    ...mapGetters('global', {
+      isLoading: 'getInitLoading'
+    })
+  },
+  mounted() {
+    this.$store.dispatch(`global/${G.CHANGE_LOADING}`, false)
   }
 }
 </script>

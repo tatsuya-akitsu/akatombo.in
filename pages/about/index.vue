@@ -1,21 +1,21 @@
 <template>
   <div>
-    <section 
-      id="about" 
+    <section
+      id="about"
       class="section about">
       <div class="about__header">
         <div class="wrapper">
           <div class="thumbnail">
-            <figure><img 
-              src="/img/profile.jpg" 
+            <figure><img
+              src="/img/profile.jpg"
               alt="" ></figure>
           </div>
           <div class="body">
             <p class="name"><span class="name__en">Tatsuya Akitsu</span><span class="job">Frontend Engineer</span></p>
             <div class="body__inner">
               <p class="birth">August 1, 1993 (age 25)</p>
-              <p class="place"><img 
-                src="/img/icons/place.svg" 
+              <p class="place"><img
+                src="/img/icons/place.svg"
                 alt="" >Kanagawa, Japan</p>
             </div>
             <p class="summary">
@@ -31,15 +31,15 @@
           <div class="about__body--history">
             <h2>HISTROY</h2>
             <p class="text">
-              <a 
-                href="https://ja.wikipedia.org/wiki/%E6%9D%BE%E5%B1%B1%E3%82%B1%E3%83%B3%E3%82%A4%E3%83%81" 
-                target="_blank">松山ケンイチ</a>の演技を某作品で見て、俳優を目指すため<a 
-                  href="https://ha.athuman.com/" 
-                  target="_blank">総合学園ヒューマンアカデミー</a>へ進学。演技･ダンス･歌などを教わりながら、学外の舞台へ出演し経験値をためるも、演じることへの違和感と、モノづくりへの関心と興味が出てきたことをきっかけに学外への舞台出演を止め2年で<a 
-                    href="https://ha.athuman.com/" 
+              <a
+                href="https://ja.wikipedia.org/wiki/%E6%9D%BE%E5%B1%B1%E3%82%B1%E3%83%B3%E3%82%A4%E3%83%81"
+                target="_blank">松山ケンイチ</a>の演技を某作品で見て、俳優を目指すため<a
+                  href="https://ha.athuman.com/"
+                  target="_blank">総合学園ヒューマンアカデミー</a>へ進学。演技･ダンス･歌などを教わりながら、学外の舞台へ出演し経験値をためるも、演じることへの違和感と、モノづくりへの関心と興味が出てきたことをきっかけに学外への舞台出演を止め2年で<a
+                    href="https://ha.athuman.com/"
                     target="_blank">総合学園ヒューマンアカデミー</a>を卒業。<br>
-              その後、中学生時代からYahoo!Geocities、モバゲーなどで触れてきたWEBの世界へ興味を持ち、半年間職業訓練学校でHTML5、CSS3、jQuery、WordPress、Illustrator、Photoshopを学び、<a 
-                href="https://naked.co.jp/" 
+              その後、中学生時代からYahoo!Geocities、モバゲーなどで触れてきたWEBの世界へ興味を持ち、半年間職業訓練学校でHTML5、CSS3、jQuery、WordPress、Illustrator、Photoshopを学び、<a
+                href="https://naked.co.jp/"
                 target="_blank">NAKED.inc</a>へWEB担当として入社。<br>
               HTML、CSS、jQuery、WordPressを活用し、自社企画のイベントLPやポータルサイトのデザイン制作~プログラム実装、サーバー管理･データ解析と一連の業務を担当。1ヶ月に4~5サイトの制作をおおよそ担当し、更に上へのキャリアパスを思い、転職。<br>
               都内WEB制作会社にてフロントエンドを担当。
@@ -58,24 +58,24 @@
                 <dt>Email</dt>
                 <dd><a href="mailto:tatsuya.regulus0138@gmail.com">tatsuya.regulus0138@gmail.com</a></dd>
                 <dt>Facebook</dt>
-                <dd><a 
-                  href="https://www.facebook.com/akitsu.tatsuya" 
+                <dd><a
+                  href="https://www.facebook.com/akitsu.tatsuya"
                   target="_blank">facebook.com/akitsu.tatsuya</a></dd>
                 <dt>twitter</dt>
-                <dd><a 
-                  href="https://twitter.com/Rote_libelle" 
+                <dd><a
+                  href="https://twitter.com/Rote_libelle"
                   target="_blank">twitter.com/Rote_libelle</a></dd>
                 <dt>instagram</dt>
-                <dd><a 
-                  href="https://www.instagram.com/sho_at/" 
+                <dd><a
+                  href="https://www.instagram.com/sho_at/"
                   target="_blank">instagram.com/sho_at</a></dd>
                 <dt>Github</dt>
-                <dd><a 
-                  href="https://github.com/tatsuya-akitsu" 
+                <dd><a
+                  href="https://github.com/tatsuya-akitsu"
                   target="_blank">github.com/tatsuy-akitsu</a></dd>
                 <dt>Wantedly</dt>
-                <dd><a 
-                  href="https://www.wantedly.com/users/18000536" 
+                <dd><a
+                  href="https://www.wantedly.com/users/18000536"
                   target="_blank">wantedly.com</a></dd>
               </dl>
             </div>
@@ -87,6 +87,8 @@
 </template>
 
 <script>
+import { T as G } from '../../store/global/types'
+
 export default {
   name: 'About',
   head: () => {
@@ -95,7 +97,7 @@ export default {
     }
   },
   created() {
-    this.$store.commit('routing', 'about')
+    this.$store.dispatch(`global/${G.SET_ROUTES}`, 'about')
   }
 }
 </script>
