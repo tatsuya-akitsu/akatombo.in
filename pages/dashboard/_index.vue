@@ -62,7 +62,9 @@
                       name="file"
                       @change="inputThumbnail"
                     >
-                    <div class="thumbnail-preview__box" />
+                    <div
+                      :style="{ backgroundImage: 'url(' + workThumbnail + ')' }"
+                      class="thumbnail-preview__box"/>
                   </div>
                 </div>
               </div>
@@ -143,6 +145,11 @@ export default {
       workThumbnail: 'getWorkThumbnail'
     })
   },
+  watch: {
+    $route() {
+      this.$store.dispatch(`global/${G.SET_ROUTES}`, 'dashboard')
+    }
+  },
   mounted() {
     this.$store.dispatch(`global/${G.SET_ROUTES}`, 'dashboard')
     editor = new SimpleMDE({ element: document.getElementById('editor') })
@@ -168,16 +175,14 @@ export default {
   methods: {
     inputThumbnail(e) {
       let files = e.target.files || e.dataTransfer.files
-      this.$store.dispatch(`${G.AJAX_GET_WORK_THUMBNAIL}`, files)
-      const thumbnail = window.document.querySelector('.thumbnail-preview__box')
-      thumbnail.style.backgroundImage = 'url(' + this.workThumbnail + ')'
+      this.$store.dispatch(`global/${G.AJAX_GET_WORK_THUMBNAIL}`, files)
     },
     contributionPost() {
       const postdata = {
         title: this.work.title,
         url: this.work.url,
         doc: editor.value(),
-        worksTag: this.work.worksTag,
+        worksTag: this.work.workTags,
         photo: this.workThumbnail,
         design: this.work.times.design,
         coding: this.work.times.coding,
@@ -185,7 +190,7 @@ export default {
         category: this.work.category
       }
 
-      this.$store.commit(`global/${G.AJAX_POST_WORK_DATA}`, postdata)
+      this.$store.dispatch(`global/${G.AJAX_POST_WORK_DATA}`, postdata)
       this.$router.push(`/dashboard/complete`)
     }
   }

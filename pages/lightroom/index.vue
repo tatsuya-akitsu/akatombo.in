@@ -34,6 +34,11 @@ export default {
       myWorks: 'getWorksData'
     })
   },
+  watch: {
+    $route() {
+      this.$store.dispatch(`global/${G.SET_ROUTES}`, 'lightroom')
+    }
+  },
   created() {
     this.$store.dispatch(`global/${G.SET_ROUTES}`, 'lightroom')
     this.$store.dispatch(`global/${G.AJAX_GET_WORKS_DATA}`, 'Lightroom')

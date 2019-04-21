@@ -24,6 +24,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { T as G } from '../../../store/global/types'
 
 export default {
   name: 'Complete',
@@ -36,6 +37,14 @@ export default {
     ...mapGetters('global', {
       myUserInfo: 'getUserInfo'
     })
+  },
+  watch: {
+    $route() {
+      this.$store.dispatch(`global/${G.SET_ROUTES}`, 'dashboard')
+    }
+  },
+  created() {
+    this.$store.dispatch(`global/${G.SET_ROUTES}`, 'dashboard')
   },
   mounted() {
     const section = document.querySelector('.complete')

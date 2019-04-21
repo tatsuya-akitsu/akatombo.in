@@ -111,6 +111,11 @@ export default {
       myData: 'getTopWorks'
     })
   },
+  watch: {
+    $route() {
+      this.$store.dispatch(`global/${G.SET_ROUTES}`, 'top')
+    }
+  },
   mounted() {
     const header = document.getElementById('header')
     let wh = window.outerHeight

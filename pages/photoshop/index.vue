@@ -34,6 +34,11 @@ export default {
       myWorks: 'getWorksData'
     })
   },
+  watch: {
+    $route() {
+      this.$store.dispatch(`global/${G.SET_ROUTES}`, 'Photoshop')
+    }
+  },
   created() {
     this.$store.dispatch(`global/${G.SET_ROUTES}`, 'Photoshop')
     this.$store.dispatch(`global/${G.AJAX_GET_WORKS_DATA}`, 'Photoshop')

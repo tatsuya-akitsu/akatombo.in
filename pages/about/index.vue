@@ -96,6 +96,11 @@ export default {
       title: 'About us'
     }
   },
+  watch: {
+    $route() {
+      this.$store.dispatch(`global/${G.SET_ROUTES}`, 'about')
+    }
+  },
   created() {
     this.$store.dispatch(`global/${G.SET_ROUTES}`, 'about')
   }

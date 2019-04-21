@@ -1,5 +1,5 @@
-import firebase from '@/plugins/firebase.js'
-import Firebase from 'firebase'
+import firebaseApp from '@/plugins/firebase.js'
+import firebase from 'firebase'
 import { T } from './types'
 
 export const actions = {
@@ -7,7 +7,7 @@ export const actions = {
     commit(T.SET_ROUTES, val)
   },
   [T.USER_LOGGEDIN]({ commit }, obj) {
-    firebase
+    firebaseApp
       .auth()
       .signInWithEmailAndPassword(obj.mail, obj.password)
       .then(() => {
@@ -18,7 +18,7 @@ export const actions = {
       })
   },
   [T.USER_LOGOUT]({ commit }) {
-    firebase
+    firebaseApp
       .auth()
       .signOut()
       .then(() => {
@@ -34,14 +34,14 @@ export const actions = {
   [T.GET_USER_INFO]({ commit }) {
     const userInfo = {}
     userInfo.uid = firebase.auth().currentUser.uid
-    userInfo.name = firebasse.auth().currentUser.displayName
+    userInfo.name = firebase.auth().currentUser.displayName
     userInfo.email = firebase.auth().currentUser.email
     userInfo.photoUrl = firebase.auth().currentUser.photoURL
     commit(T.GET_USER_INFO, userInfo)
   },
   [T.AJAX_GET_TOP_WEB_WORKS]({ commit }) {
     let _works = []
-    firebase
+    firebaseApp
       .firestore()
       .collection('web')
       .limit(7)
@@ -54,7 +54,7 @@ export const actions = {
     commit(T.AJAX_GET_TOP_WEB_WORKS, _works)
   },
   [T.AJAX_GET_WORK_THUMBNAIL]({ commit }, obj) {
-    const storageRef = Firebase.storage().ref()
+    const storageRef = firebase.storage().ref()
     var uploadRef = storageRef.child(obj[0].name)
     const f = obj[0]
     uploadRef.put(f).then(snapShot => {
@@ -69,7 +69,8 @@ export const actions = {
     })
   },
   [T.AJAX_POST_WORK_DATA]({ commit }, obj) {
-    firebase
+    console.log(obj, '===========')
+    firebaseApp
       .firestore()
       .collection(obj.category)
       .add(obj)
@@ -82,7 +83,7 @@ export const actions = {
   },
   [T.AJAX_GET_WORKS_DATA]({ commit }, val) {
     let _works = []
-    firebase
+    firebaseApp
       .firestore()
       .collection(val)
       .get()
@@ -94,7 +95,7 @@ export const actions = {
       })
   },
   [T.AJAX_GET_WORKS_DETAIL_DATA]({ commit }, obj) {
-    firebase
+    firebaseApp
       .firestore()
       .collection(obj.category)
       .doc(obj.orderId)
@@ -105,7 +106,7 @@ export const actions = {
   },
   [T.AJAX_GET_DETAIL_ITEMS]({ commit }, obj) {
     let _works = []
-    firebase
+    firebaseApp
       .firestore()
       .collection(obj)
       .limit(3)

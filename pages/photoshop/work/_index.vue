@@ -24,22 +24,14 @@
             </div>
           </div>
         </div>
-        <div class="other-works">
-          <h3 class="c-ttl--h3">OTHER WORKS</h3>
-          <div class="other-works__inner">
-            <app-card
-              v-for="(work, i) in myData.other"
-              :key="i"
-              :worksitem="work" />
-          </div>
-        </div>
+        <detail-other-work-items :data="myData" />
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import AppCard from '~/components/AppCard.vue'
+import DetailOtherWorkItems from '~/components/items/detailOtherWorkItem.vue'
 import { mapGetters } from 'vuex'
 import { T as G } from '../../../store/global/types'
 
@@ -51,12 +43,17 @@ export default {
     }
   },
   components: {
-    AppCard
+    DetailOtherWorkItems
   },
   computed: {
     ...mapGetters('global', {
       myData: 'getWorkDetail'
     })
+  },
+  watch: {
+    $route() {
+      this.$store.dispatch(`global/${G.SET_ROUTES}`, 'Photoshop')
+    }
   },
   mounted() {
     const _orderObj = {}

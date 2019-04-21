@@ -66,6 +66,11 @@ export default {
       password: ''
     }
   },
+  watch: {
+    $route() {
+      this.$store.dispatch(`global/${G.SET_ROUTES}`, 'login')
+    }
+  },
   mounted() {
     this.$store.dispatch(`global/${G.SET_ROUTES}`, 'login')
     const login = document.querySelector('.login')
@@ -78,8 +83,8 @@ export default {
       const userObj = {}
       userObj.mail = this.email
       userObj.password = this.password
-      this.$store.dispatch(`${G.USER_LOGGEDIN}`, userObj)
-      this.$route.push('cmnEventHandler')
+      this.$store.dispatch(`global/${G.USER_LOGGEDIN}`, userObj)
+      this.$router.push('/cmnEventHandler')
     }
   }
 }
