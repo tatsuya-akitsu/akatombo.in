@@ -1,6 +1,6 @@
 export default {
   labels: {
-    target: "MORE PRODUCTS",
+    target: "more products",
     footer: {
       contents: "contents",
       works: "works",
