@@ -1,40 +1,48 @@
 {
-  "name": "akatombo",
-  "version": "1.0.0",
-  "description": "個人ポートフォリオ",
-  "author": "tatsuya akitsu",
+  "name": "akatombo.in",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@johmun/vue-tags-input": "^1.5.9",
-    "cross-env": "^5.2.0",
-    "firebase": "^5.5.7",
-    "firebase-tools": "^6.0.1",
-    "node-sass": "^4.10.0",
-    "nuxt": "^2.0.0",
-    "nuxt-sass-resources-loader": "^2.0.5",
-    "sass-loader": "^7.1.0",
-    "simplemde": "^1.11.2",
-    "style-loader": "^0.23.1",
-    "style-resources-loader": "^1.2.1",
-    "vue": "^2.5.17",
-    "vuex": "^3.0.1"
+    "core-js": "^3.4.4",
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.3",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "eslint": "^5.0.1",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-loader": "^2.0.0",
-    "eslint-plugin-prettier": "2.6.2",
-    "eslint-plugin-vue": "^4.0.0",
-    "nodemon": "^1.11.0",
-    "prettier": "1.14.3"
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "@vue/eslint-config-prettier": "^5.0.0",
+    "axios": "^0.19.1",
+    "babel-eslint": "^10.0.3",
+    "dayjs": "^1.8.19",
+    "eslint": "^5.16.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "hard-source-webpack-plugin": "^0.13.1",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
+    "ress": "^2.0.4",
+    "sass": "^1.23.7",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.1.3",
+    "style-resources-loader": "^1.3.3",
+    "vue-cli-plugin-style-resources-loader": "^0.1.4",
+    "vue-template-compiler": "^2.6.10",
+    "webpack-bundle-analyzer": "^3.6.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }
