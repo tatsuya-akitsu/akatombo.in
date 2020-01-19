@@ -26,6 +26,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "hard-source-webpack-plugin": "^0.13.1",
     "lint-staged": "^9.5.0",
+    "now": "^16.7.3",
     "prettier": "^1.19.1",
     "ress": "^2.0.4",
     "sass": "^1.23.7",
