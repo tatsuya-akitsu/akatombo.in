@@ -20,5 +20,5 @@ export default {
     graphic: "",
     photograph: ""
   },
-  copyright: "&copy;2019 a゜"
+  copyright: "&copy;2020 a゜"
 };
