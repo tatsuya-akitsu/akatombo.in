@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+      "outDir": "./dist/",
+      "strict": true,
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "esModuleInterop": true,
+      "module": "commonjs",
+      "target": "esnext",
+      "jsx": "react",
+      "lib": ["dom", "es2015", "es2017"]
+  },
+  "include": [
+      "./src/**/*",
+      "./types/**/*",
+      "./gatsby-node/**/*"
+  ]
+}
