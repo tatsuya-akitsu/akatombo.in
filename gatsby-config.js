@@ -38,5 +38,68 @@ module.exports = {
       resolve: `gatsby-plugin-styled-components`,
       options: {}
     },
+    {
+      resolve: "gatsby-source-microcms",
+      options: {
+        apiKey: 'e1476c41-e822-4e49-8675-fa2ac1200d1e',
+        serviceId: 'akatombo',
+        endpoint: 'photograph',
+        query: {
+          limit: 100
+        }
+      },
+    },
+    {
+      resolve: "gatsby-source-microcms",
+      options: {
+        apiKey: 'e1476c41-e822-4e49-8675-fa2ac1200d1e',
+        serviceId: 'akatombo',
+        endpoint: 'graphic',
+        query: {
+          limit: 100
+        }
+      },
+    },
+    {
+      resolve: "gatsby-source-microcms",
+      options: {
+        apiKey: 'e1476c41-e822-4e49-8675-fa2ac1200d1e',
+        serviceId: 'akatombo',
+        endpoint: 'illustrator',
+        query: {
+          limit: 100
+        }
+      },
+    },
+    {
+      resolve: "gatsby-source-microcms",
+      options: {
+        apiKey: 'e1476c41-e822-4e49-8675-fa2ac1200d1e',
+        serviceId: 'akatombo',
+        endpoint: 'web',
+        query: {
+          limit: 100
+        }
+      },
+    },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Noto Sans JP`,
+            variants: [`100`, `300`, `400`, `500`, `700`, `900`]
+          },
+          {
+            family: `Karla`,
+            variants: [`100`, `300`, `400`, `500`, `700`, `900`]
+          },
+          {
+            family: `Rubik`,
+            variants: [`300`, `400`, `500`, `700`]
+          },
+        ],
+      },
+    }
   ],
 }

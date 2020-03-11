@@ -1,15 +1,12 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import GlobalStyle from '../styles/globalStyle'
 
-import Header from "./header"
+import Header from '../components/molecules/header'
+import HomeIntroSection from '../components/organisms/HomeIntro'
+import HomeAboutSection from '../components/organisms/HomeAbout'
+import HomeWorksSection from '../components/organisms/HomeWorks'
 
 const Layout = ({ children }: any) => {
   const data = useStaticQuery(graphql`
@@ -24,21 +21,17 @@ const Layout = ({ children }: any) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+      <GlobalStyle />
+      <Header />
+      <HomeIntroSection />
+      <HomeAboutSection />
+      <HomeWorksSection />
+      <main>{children}</main>
+      <footer>
+        © {new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.org">Gatsby</a>
+      </footer>
     </>
   )
 }

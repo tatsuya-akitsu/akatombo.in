@@ -1281,6 +1281,781 @@ export type IntQueryOperatorInput = {
 };
 
 
+export type MicrocmsGraphic = Node & {
+  id: Scalars['ID'],
+  parent?: Maybe<Node>,
+  children: Array<Node>,
+  internal: Internal,
+  createdAt?: Maybe<Scalars['Date']>,
+  updatedAt?: Maybe<Scalars['Date']>,
+  image?: Maybe<MicrocmsGraphicImage>,
+  tag?: Maybe<Scalars['String']>,
+  publishedAt?: Maybe<Scalars['Date']>,
+  graphicId?: Maybe<Scalars['String']>,
+};
+
+
+export type MicrocmsGraphicCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+
+export type MicrocmsGraphicUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+
+export type MicrocmsGraphicPublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+export type MicrocmsGraphicConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<MicrocmsGraphicEdge>,
+  nodes: Array<MicrocmsGraphic>,
+  pageInfo: PageInfo,
+  distinct: Array<Scalars['String']>,
+  group: Array<MicrocmsGraphicGroupConnection>,
+};
+
+
+export type MicrocmsGraphicConnectionDistinctArgs = {
+  field: MicrocmsGraphicFieldsEnum
+};
+
+
+export type MicrocmsGraphicConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>,
+  field: MicrocmsGraphicFieldsEnum
+};
+
+export type MicrocmsGraphicEdge = {
+  next?: Maybe<MicrocmsGraphic>,
+  node: MicrocmsGraphic,
+  previous?: Maybe<MicrocmsGraphic>,
+};
+
+export type MicrocmsGraphicFieldsEnum = 
+  'id' |
+  'parent___id' |
+  'parent___parent___id' |
+  'parent___parent___parent___id' |
+  'parent___parent___parent___children' |
+  'parent___parent___children' |
+  'parent___parent___children___id' |
+  'parent___parent___children___children' |
+  'parent___parent___internal___content' |
+  'parent___parent___internal___contentDigest' |
+  'parent___parent___internal___description' |
+  'parent___parent___internal___fieldOwners' |
+  'parent___parent___internal___ignoreType' |
+  'parent___parent___internal___mediaType' |
+  'parent___parent___internal___owner' |
+  'parent___parent___internal___type' |
+  'parent___children' |
+  'parent___children___id' |
+  'parent___children___parent___id' |
+  'parent___children___parent___children' |
+  'parent___children___children' |
+  'parent___children___children___id' |
+  'parent___children___children___children' |
+  'parent___children___internal___content' |
+  'parent___children___internal___contentDigest' |
+  'parent___children___internal___description' |
+  'parent___children___internal___fieldOwners' |
+  'parent___children___internal___ignoreType' |
+  'parent___children___internal___mediaType' |
+  'parent___children___internal___owner' |
+  'parent___children___internal___type' |
+  'parent___internal___content' |
+  'parent___internal___contentDigest' |
+  'parent___internal___description' |
+  'parent___internal___fieldOwners' |
+  'parent___internal___ignoreType' |
+  'parent___internal___mediaType' |
+  'parent___internal___owner' |
+  'parent___internal___type' |
+  'children' |
+  'children___id' |
+  'children___parent___id' |
+  'children___parent___parent___id' |
+  'children___parent___parent___children' |
+  'children___parent___children' |
+  'children___parent___children___id' |
+  'children___parent___children___children' |
+  'children___parent___internal___content' |
+  'children___parent___internal___contentDigest' |
+  'children___parent___internal___description' |
+  'children___parent___internal___fieldOwners' |
+  'children___parent___internal___ignoreType' |
+  'children___parent___internal___mediaType' |
+  'children___parent___internal___owner' |
+  'children___parent___internal___type' |
+  'children___children' |
+  'children___children___id' |
+  'children___children___parent___id' |
+  'children___children___parent___children' |
+  'children___children___children' |
+  'children___children___children___id' |
+  'children___children___children___children' |
+  'children___children___internal___content' |
+  'children___children___internal___contentDigest' |
+  'children___children___internal___description' |
+  'children___children___internal___fieldOwners' |
+  'children___children___internal___ignoreType' |
+  'children___children___internal___mediaType' |
+  'children___children___internal___owner' |
+  'children___children___internal___type' |
+  'children___internal___content' |
+  'children___internal___contentDigest' |
+  'children___internal___description' |
+  'children___internal___fieldOwners' |
+  'children___internal___ignoreType' |
+  'children___internal___mediaType' |
+  'children___internal___owner' |
+  'children___internal___type' |
+  'internal___content' |
+  'internal___contentDigest' |
+  'internal___description' |
+  'internal___fieldOwners' |
+  'internal___ignoreType' |
+  'internal___mediaType' |
+  'internal___owner' |
+  'internal___type' |
+  'createdAt' |
+  'updatedAt' |
+  'image___url' |
+  'tag' |
+  'publishedAt' |
+  'graphicId';
+
+export type MicrocmsGraphicFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  createdAt?: Maybe<DateQueryOperatorInput>,
+  updatedAt?: Maybe<DateQueryOperatorInput>,
+  image?: Maybe<MicrocmsGraphicImageFilterInput>,
+  tag?: Maybe<StringQueryOperatorInput>,
+  publishedAt?: Maybe<DateQueryOperatorInput>,
+  graphicId?: Maybe<StringQueryOperatorInput>,
+};
+
+export type MicrocmsGraphicGroupConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<MicrocmsGraphicEdge>,
+  nodes: Array<MicrocmsGraphic>,
+  pageInfo: PageInfo,
+  field: Scalars['String'],
+  fieldValue?: Maybe<Scalars['String']>,
+};
+
+export type MicrocmsGraphicImage = {
+  url?: Maybe<Scalars['String']>,
+};
+
+export type MicrocmsGraphicImageFilterInput = {
+  url?: Maybe<StringQueryOperatorInput>,
+};
+
+export type MicrocmsGraphicSortInput = {
+  fields?: Maybe<Array<Maybe<MicrocmsGraphicFieldsEnum>>>,
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>,
+};
+
+export type MicrocmsIllustrator = Node & {
+  id: Scalars['ID'],
+  parent?: Maybe<Node>,
+  children: Array<Node>,
+  internal: Internal,
+  createdAt?: Maybe<Scalars['Date']>,
+  updatedAt?: Maybe<Scalars['Date']>,
+  image?: Maybe<MicrocmsIllustratorImage>,
+  tag?: Maybe<Scalars['String']>,
+  publishedAt?: Maybe<Scalars['Date']>,
+  illustratorId?: Maybe<Scalars['String']>,
+};
+
+
+export type MicrocmsIllustratorCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+
+export type MicrocmsIllustratorUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+
+export type MicrocmsIllustratorPublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+export type MicrocmsIllustratorConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<MicrocmsIllustratorEdge>,
+  nodes: Array<MicrocmsIllustrator>,
+  pageInfo: PageInfo,
+  distinct: Array<Scalars['String']>,
+  group: Array<MicrocmsIllustratorGroupConnection>,
+};
+
+
+export type MicrocmsIllustratorConnectionDistinctArgs = {
+  field: MicrocmsIllustratorFieldsEnum
+};
+
+
+export type MicrocmsIllustratorConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>,
+  field: MicrocmsIllustratorFieldsEnum
+};
+
+export type MicrocmsIllustratorEdge = {
+  next?: Maybe<MicrocmsIllustrator>,
+  node: MicrocmsIllustrator,
+  previous?: Maybe<MicrocmsIllustrator>,
+};
+
+export type MicrocmsIllustratorFieldsEnum = 
+  'id' |
+  'parent___id' |
+  'parent___parent___id' |
+  'parent___parent___parent___id' |
+  'parent___parent___parent___children' |
+  'parent___parent___children' |
+  'parent___parent___children___id' |
+  'parent___parent___children___children' |
+  'parent___parent___internal___content' |
+  'parent___parent___internal___contentDigest' |
+  'parent___parent___internal___description' |
+  'parent___parent___internal___fieldOwners' |
+  'parent___parent___internal___ignoreType' |
+  'parent___parent___internal___mediaType' |
+  'parent___parent___internal___owner' |
+  'parent___parent___internal___type' |
+  'parent___children' |
+  'parent___children___id' |
+  'parent___children___parent___id' |
+  'parent___children___parent___children' |
+  'parent___children___children' |
+  'parent___children___children___id' |
+  'parent___children___children___children' |
+  'parent___children___internal___content' |
+  'parent___children___internal___contentDigest' |
+  'parent___children___internal___description' |
+  'parent___children___internal___fieldOwners' |
+  'parent___children___internal___ignoreType' |
+  'parent___children___internal___mediaType' |
+  'parent___children___internal___owner' |
+  'parent___children___internal___type' |
+  'parent___internal___content' |
+  'parent___internal___contentDigest' |
+  'parent___internal___description' |
+  'parent___internal___fieldOwners' |
+  'parent___internal___ignoreType' |
+  'parent___internal___mediaType' |
+  'parent___internal___owner' |
+  'parent___internal___type' |
+  'children' |
+  'children___id' |
+  'children___parent___id' |
+  'children___parent___parent___id' |
+  'children___parent___parent___children' |
+  'children___parent___children' |
+  'children___parent___children___id' |
+  'children___parent___children___children' |
+  'children___parent___internal___content' |
+  'children___parent___internal___contentDigest' |
+  'children___parent___internal___description' |
+  'children___parent___internal___fieldOwners' |
+  'children___parent___internal___ignoreType' |
+  'children___parent___internal___mediaType' |
+  'children___parent___internal___owner' |
+  'children___parent___internal___type' |
+  'children___children' |
+  'children___children___id' |
+  'children___children___parent___id' |
+  'children___children___parent___children' |
+  'children___children___children' |
+  'children___children___children___id' |
+  'children___children___children___children' |
+  'children___children___internal___content' |
+  'children___children___internal___contentDigest' |
+  'children___children___internal___description' |
+  'children___children___internal___fieldOwners' |
+  'children___children___internal___ignoreType' |
+  'children___children___internal___mediaType' |
+  'children___children___internal___owner' |
+  'children___children___internal___type' |
+  'children___internal___content' |
+  'children___internal___contentDigest' |
+  'children___internal___description' |
+  'children___internal___fieldOwners' |
+  'children___internal___ignoreType' |
+  'children___internal___mediaType' |
+  'children___internal___owner' |
+  'children___internal___type' |
+  'internal___content' |
+  'internal___contentDigest' |
+  'internal___description' |
+  'internal___fieldOwners' |
+  'internal___ignoreType' |
+  'internal___mediaType' |
+  'internal___owner' |
+  'internal___type' |
+  'createdAt' |
+  'updatedAt' |
+  'image___url' |
+  'tag' |
+  'publishedAt' |
+  'illustratorId';
+
+export type MicrocmsIllustratorFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  createdAt?: Maybe<DateQueryOperatorInput>,
+  updatedAt?: Maybe<DateQueryOperatorInput>,
+  image?: Maybe<MicrocmsIllustratorImageFilterInput>,
+  tag?: Maybe<StringQueryOperatorInput>,
+  publishedAt?: Maybe<DateQueryOperatorInput>,
+  illustratorId?: Maybe<StringQueryOperatorInput>,
+};
+
+export type MicrocmsIllustratorGroupConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<MicrocmsIllustratorEdge>,
+  nodes: Array<MicrocmsIllustrator>,
+  pageInfo: PageInfo,
+  field: Scalars['String'],
+  fieldValue?: Maybe<Scalars['String']>,
+};
+
+export type MicrocmsIllustratorImage = {
+  url?: Maybe<Scalars['String']>,
+};
+
+export type MicrocmsIllustratorImageFilterInput = {
+  url?: Maybe<StringQueryOperatorInput>,
+};
+
+export type MicrocmsIllustratorSortInput = {
+  fields?: Maybe<Array<Maybe<MicrocmsIllustratorFieldsEnum>>>,
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>,
+};
+
+export type MicrocmsPhotograph = Node & {
+  id: Scalars['ID'],
+  parent?: Maybe<Node>,
+  children: Array<Node>,
+  internal: Internal,
+  createdAt?: Maybe<Scalars['Date']>,
+  updatedAt?: Maybe<Scalars['Date']>,
+  image?: Maybe<MicrocmsPhotographImage>,
+  tag?: Maybe<Scalars['String']>,
+  publishedAt?: Maybe<Scalars['Date']>,
+  photographId?: Maybe<Scalars['String']>,
+};
+
+
+export type MicrocmsPhotographCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+
+export type MicrocmsPhotographUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+
+export type MicrocmsPhotographPublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+export type MicrocmsPhotographConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<MicrocmsPhotographEdge>,
+  nodes: Array<MicrocmsPhotograph>,
+  pageInfo: PageInfo,
+  distinct: Array<Scalars['String']>,
+  group: Array<MicrocmsPhotographGroupConnection>,
+};
+
+
+export type MicrocmsPhotographConnectionDistinctArgs = {
+  field: MicrocmsPhotographFieldsEnum
+};
+
+
+export type MicrocmsPhotographConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>,
+  field: MicrocmsPhotographFieldsEnum
+};
+
+export type MicrocmsPhotographEdge = {
+  next?: Maybe<MicrocmsPhotograph>,
+  node: MicrocmsPhotograph,
+  previous?: Maybe<MicrocmsPhotograph>,
+};
+
+export type MicrocmsPhotographFieldsEnum = 
+  'id' |
+  'parent___id' |
+  'parent___parent___id' |
+  'parent___parent___parent___id' |
+  'parent___parent___parent___children' |
+  'parent___parent___children' |
+  'parent___parent___children___id' |
+  'parent___parent___children___children' |
+  'parent___parent___internal___content' |
+  'parent___parent___internal___contentDigest' |
+  'parent___parent___internal___description' |
+  'parent___parent___internal___fieldOwners' |
+  'parent___parent___internal___ignoreType' |
+  'parent___parent___internal___mediaType' |
+  'parent___parent___internal___owner' |
+  'parent___parent___internal___type' |
+  'parent___children' |
+  'parent___children___id' |
+  'parent___children___parent___id' |
+  'parent___children___parent___children' |
+  'parent___children___children' |
+  'parent___children___children___id' |
+  'parent___children___children___children' |
+  'parent___children___internal___content' |
+  'parent___children___internal___contentDigest' |
+  'parent___children___internal___description' |
+  'parent___children___internal___fieldOwners' |
+  'parent___children___internal___ignoreType' |
+  'parent___children___internal___mediaType' |
+  'parent___children___internal___owner' |
+  'parent___children___internal___type' |
+  'parent___internal___content' |
+  'parent___internal___contentDigest' |
+  'parent___internal___description' |
+  'parent___internal___fieldOwners' |
+  'parent___internal___ignoreType' |
+  'parent___internal___mediaType' |
+  'parent___internal___owner' |
+  'parent___internal___type' |
+  'children' |
+  'children___id' |
+  'children___parent___id' |
+  'children___parent___parent___id' |
+  'children___parent___parent___children' |
+  'children___parent___children' |
+  'children___parent___children___id' |
+  'children___parent___children___children' |
+  'children___parent___internal___content' |
+  'children___parent___internal___contentDigest' |
+  'children___parent___internal___description' |
+  'children___parent___internal___fieldOwners' |
+  'children___parent___internal___ignoreType' |
+  'children___parent___internal___mediaType' |
+  'children___parent___internal___owner' |
+  'children___parent___internal___type' |
+  'children___children' |
+  'children___children___id' |
+  'children___children___parent___id' |
+  'children___children___parent___children' |
+  'children___children___children' |
+  'children___children___children___id' |
+  'children___children___children___children' |
+  'children___children___internal___content' |
+  'children___children___internal___contentDigest' |
+  'children___children___internal___description' |
+  'children___children___internal___fieldOwners' |
+  'children___children___internal___ignoreType' |
+  'children___children___internal___mediaType' |
+  'children___children___internal___owner' |
+  'children___children___internal___type' |
+  'children___internal___content' |
+  'children___internal___contentDigest' |
+  'children___internal___description' |
+  'children___internal___fieldOwners' |
+  'children___internal___ignoreType' |
+  'children___internal___mediaType' |
+  'children___internal___owner' |
+  'children___internal___type' |
+  'internal___content' |
+  'internal___contentDigest' |
+  'internal___description' |
+  'internal___fieldOwners' |
+  'internal___ignoreType' |
+  'internal___mediaType' |
+  'internal___owner' |
+  'internal___type' |
+  'createdAt' |
+  'updatedAt' |
+  'image___url' |
+  'tag' |
+  'publishedAt' |
+  'photographId';
+
+export type MicrocmsPhotographFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  createdAt?: Maybe<DateQueryOperatorInput>,
+  updatedAt?: Maybe<DateQueryOperatorInput>,
+  image?: Maybe<MicrocmsPhotographImageFilterInput>,
+  tag?: Maybe<StringQueryOperatorInput>,
+  publishedAt?: Maybe<DateQueryOperatorInput>,
+  photographId?: Maybe<StringQueryOperatorInput>,
+};
+
+export type MicrocmsPhotographGroupConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<MicrocmsPhotographEdge>,
+  nodes: Array<MicrocmsPhotograph>,
+  pageInfo: PageInfo,
+  field: Scalars['String'],
+  fieldValue?: Maybe<Scalars['String']>,
+};
+
+export type MicrocmsPhotographImage = {
+  url?: Maybe<Scalars['String']>,
+};
+
+export type MicrocmsPhotographImageFilterInput = {
+  url?: Maybe<StringQueryOperatorInput>,
+};
+
+export type MicrocmsPhotographSortInput = {
+  fields?: Maybe<Array<Maybe<MicrocmsPhotographFieldsEnum>>>,
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>,
+};
+
+export type MicrocmsWeb = Node & {
+  id: Scalars['ID'],
+  parent?: Maybe<Node>,
+  children: Array<Node>,
+  internal: Internal,
+  createdAt?: Maybe<Scalars['Date']>,
+  updatedAt?: Maybe<Scalars['Date']>,
+  image?: Maybe<MicrocmsWebImage>,
+  tag?: Maybe<Scalars['String']>,
+  publishedAt?: Maybe<Scalars['Date']>,
+  url?: Maybe<Scalars['String']>,
+  webId?: Maybe<Scalars['String']>,
+};
+
+
+export type MicrocmsWebCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+
+export type MicrocmsWebUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+
+export type MicrocmsWebPublishedAtArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
+};
+
+export type MicrocmsWebConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<MicrocmsWebEdge>,
+  nodes: Array<MicrocmsWeb>,
+  pageInfo: PageInfo,
+  distinct: Array<Scalars['String']>,
+  group: Array<MicrocmsWebGroupConnection>,
+};
+
+
+export type MicrocmsWebConnectionDistinctArgs = {
+  field: MicrocmsWebFieldsEnum
+};
+
+
+export type MicrocmsWebConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>,
+  field: MicrocmsWebFieldsEnum
+};
+
+export type MicrocmsWebEdge = {
+  next?: Maybe<MicrocmsWeb>,
+  node: MicrocmsWeb,
+  previous?: Maybe<MicrocmsWeb>,
+};
+
+export type MicrocmsWebFieldsEnum = 
+  'id' |
+  'parent___id' |
+  'parent___parent___id' |
+  'parent___parent___parent___id' |
+  'parent___parent___parent___children' |
+  'parent___parent___children' |
+  'parent___parent___children___id' |
+  'parent___parent___children___children' |
+  'parent___parent___internal___content' |
+  'parent___parent___internal___contentDigest' |
+  'parent___parent___internal___description' |
+  'parent___parent___internal___fieldOwners' |
+  'parent___parent___internal___ignoreType' |
+  'parent___parent___internal___mediaType' |
+  'parent___parent___internal___owner' |
+  'parent___parent___internal___type' |
+  'parent___children' |
+  'parent___children___id' |
+  'parent___children___parent___id' |
+  'parent___children___parent___children' |
+  'parent___children___children' |
+  'parent___children___children___id' |
+  'parent___children___children___children' |
+  'parent___children___internal___content' |
+  'parent___children___internal___contentDigest' |
+  'parent___children___internal___description' |
+  'parent___children___internal___fieldOwners' |
+  'parent___children___internal___ignoreType' |
+  'parent___children___internal___mediaType' |
+  'parent___children___internal___owner' |
+  'parent___children___internal___type' |
+  'parent___internal___content' |
+  'parent___internal___contentDigest' |
+  'parent___internal___description' |
+  'parent___internal___fieldOwners' |
+  'parent___internal___ignoreType' |
+  'parent___internal___mediaType' |
+  'parent___internal___owner' |
+  'parent___internal___type' |
+  'children' |
+  'children___id' |
+  'children___parent___id' |
+  'children___parent___parent___id' |
+  'children___parent___parent___children' |
+  'children___parent___children' |
+  'children___parent___children___id' |
+  'children___parent___children___children' |
+  'children___parent___internal___content' |
+  'children___parent___internal___contentDigest' |
+  'children___parent___internal___description' |
+  'children___parent___internal___fieldOwners' |
+  'children___parent___internal___ignoreType' |
+  'children___parent___internal___mediaType' |
+  'children___parent___internal___owner' |
+  'children___parent___internal___type' |
+  'children___children' |
+  'children___children___id' |
+  'children___children___parent___id' |
+  'children___children___parent___children' |
+  'children___children___children' |
+  'children___children___children___id' |
+  'children___children___children___children' |
+  'children___children___internal___content' |
+  'children___children___internal___contentDigest' |
+  'children___children___internal___description' |
+  'children___children___internal___fieldOwners' |
+  'children___children___internal___ignoreType' |
+  'children___children___internal___mediaType' |
+  'children___children___internal___owner' |
+  'children___children___internal___type' |
+  'children___internal___content' |
+  'children___internal___contentDigest' |
+  'children___internal___description' |
+  'children___internal___fieldOwners' |
+  'children___internal___ignoreType' |
+  'children___internal___mediaType' |
+  'children___internal___owner' |
+  'children___internal___type' |
+  'internal___content' |
+  'internal___contentDigest' |
+  'internal___description' |
+  'internal___fieldOwners' |
+  'internal___ignoreType' |
+  'internal___mediaType' |
+  'internal___owner' |
+  'internal___type' |
+  'createdAt' |
+  'updatedAt' |
+  'image___url' |
+  'tag' |
+  'publishedAt' |
+  'url' |
+  'webId';
+
+export type MicrocmsWebFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  createdAt?: Maybe<DateQueryOperatorInput>,
+  updatedAt?: Maybe<DateQueryOperatorInput>,
+  image?: Maybe<MicrocmsWebImageFilterInput>,
+  tag?: Maybe<StringQueryOperatorInput>,
+  publishedAt?: Maybe<DateQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  webId?: Maybe<StringQueryOperatorInput>,
+};
+
+export type MicrocmsWebGroupConnection = {
+  totalCount: Scalars['Int'],
+  edges: Array<MicrocmsWebEdge>,
+  nodes: Array<MicrocmsWeb>,
+  pageInfo: PageInfo,
+  field: Scalars['String'],
+  fieldValue?: Maybe<Scalars['String']>,
+};
+
+export type MicrocmsWebImage = {
+  url?: Maybe<Scalars['String']>,
+};
+
+export type MicrocmsWebImageFilterInput = {
+  url?: Maybe<StringQueryOperatorInput>,
+};
+
+export type MicrocmsWebSortInput = {
+  fields?: Maybe<Array<Maybe<MicrocmsWebFieldsEnum>>>,
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>,
+};
+
 /** Node Interface */
 export type Node = {
   id: Scalars['ID'],
@@ -1336,6 +2111,14 @@ export type Query = {
   allDirectory: DirectoryConnection,
   imageSharp?: Maybe<ImageSharp>,
   allImageSharp: ImageSharpConnection,
+  microcmsWeb?: Maybe<MicrocmsWeb>,
+  allMicrocmsWeb: MicrocmsWebConnection,
+  microcmsIllustrator?: Maybe<MicrocmsIllustrator>,
+  allMicrocmsIllustrator: MicrocmsIllustratorConnection,
+  microcmsGraphic?: Maybe<MicrocmsGraphic>,
+  allMicrocmsGraphic: MicrocmsGraphicConnection,
+  microcmsPhotograph?: Maybe<MicrocmsPhotograph>,
+  allMicrocmsPhotograph: MicrocmsPhotographConnection,
   site?: Maybe<Site>,
   allSite: SiteConnection,
   sitePlugin?: Maybe<SitePlugin>,
@@ -1467,6 +2250,95 @@ export type QueryAllImageSharpArgs = {
 };
 
 
+export type QueryMicrocmsWebArgs = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  createdAt?: Maybe<DateQueryOperatorInput>,
+  updatedAt?: Maybe<DateQueryOperatorInput>,
+  image?: Maybe<MicrocmsWebImageFilterInput>,
+  tag?: Maybe<StringQueryOperatorInput>,
+  publishedAt?: Maybe<DateQueryOperatorInput>,
+  url?: Maybe<StringQueryOperatorInput>,
+  webId?: Maybe<StringQueryOperatorInput>
+};
+
+
+export type QueryAllMicrocmsWebArgs = {
+  filter?: Maybe<MicrocmsWebFilterInput>,
+  sort?: Maybe<MicrocmsWebSortInput>,
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryMicrocmsIllustratorArgs = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  createdAt?: Maybe<DateQueryOperatorInput>,
+  updatedAt?: Maybe<DateQueryOperatorInput>,
+  image?: Maybe<MicrocmsIllustratorImageFilterInput>,
+  tag?: Maybe<StringQueryOperatorInput>,
+  publishedAt?: Maybe<DateQueryOperatorInput>,
+  illustratorId?: Maybe<StringQueryOperatorInput>
+};
+
+
+export type QueryAllMicrocmsIllustratorArgs = {
+  filter?: Maybe<MicrocmsIllustratorFilterInput>,
+  sort?: Maybe<MicrocmsIllustratorSortInput>,
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryMicrocmsGraphicArgs = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  createdAt?: Maybe<DateQueryOperatorInput>,
+  updatedAt?: Maybe<DateQueryOperatorInput>,
+  image?: Maybe<MicrocmsGraphicImageFilterInput>,
+  tag?: Maybe<StringQueryOperatorInput>,
+  publishedAt?: Maybe<DateQueryOperatorInput>,
+  graphicId?: Maybe<StringQueryOperatorInput>
+};
+
+
+export type QueryAllMicrocmsGraphicArgs = {
+  filter?: Maybe<MicrocmsGraphicFilterInput>,
+  sort?: Maybe<MicrocmsGraphicSortInput>,
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryMicrocmsPhotographArgs = {
+  id?: Maybe<StringQueryOperatorInput>,
+  parent?: Maybe<NodeFilterInput>,
+  children?: Maybe<NodeFilterListInput>,
+  internal?: Maybe<InternalFilterInput>,
+  createdAt?: Maybe<DateQueryOperatorInput>,
+  updatedAt?: Maybe<DateQueryOperatorInput>,
+  image?: Maybe<MicrocmsPhotographImageFilterInput>,
+  tag?: Maybe<StringQueryOperatorInput>,
+  publishedAt?: Maybe<DateQueryOperatorInput>,
+  photographId?: Maybe<StringQueryOperatorInput>
+};
+
+
+export type QueryAllMicrocmsPhotographArgs = {
+  filter?: Maybe<MicrocmsPhotographFilterInput>,
+  sort?: Maybe<MicrocmsPhotographSortInput>,
+  skip?: Maybe<Scalars['Int']>,
+  limit?: Maybe<Scalars['Int']>
+};
+
+
 export type QuerySiteArgs = {
   id?: Maybe<StringQueryOperatorInput>,
   parent?: Maybe<NodeFilterInput>,
@@ -1475,8 +2347,6 @@ export type QuerySiteArgs = {
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>,
   port?: Maybe<IntQueryOperatorInput>,
   host?: Maybe<StringQueryOperatorInput>,
-  polyfill?: Maybe<BooleanQueryOperatorInput>,
-  pathPrefix?: Maybe<StringQueryOperatorInput>,
   buildTime?: Maybe<DateQueryOperatorInput>
 };
 
@@ -1519,8 +2389,8 @@ export type QuerySitePageArgs = {
   parent?: Maybe<NodeFilterInput>,
   children?: Maybe<NodeFilterListInput>,
   internal?: Maybe<InternalFilterInput>,
-  path?: Maybe<StringQueryOperatorInput>,
   internalComponentName?: Maybe<StringQueryOperatorInput>,
+  path?: Maybe<StringQueryOperatorInput>,
   component?: Maybe<StringQueryOperatorInput>,
   componentChunkName?: Maybe<StringQueryOperatorInput>,
   isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>,
@@ -1545,8 +2415,6 @@ export type Site = Node & {
   siteMetadata?: Maybe<SiteSiteMetadata>,
   port?: Maybe<Scalars['Int']>,
   host?: Maybe<Scalars['String']>,
-  polyfill?: Maybe<Scalars['Boolean']>,
-  pathPrefix?: Maybe<Scalars['String']>,
   buildTime?: Maybe<Scalars['Date']>,
 };
 
@@ -1677,8 +2545,6 @@ export type SiteFieldsEnum =
   'siteMetadata___author' |
   'port' |
   'host' |
-  'polyfill' |
-  'pathPrefix' |
   'buildTime';
 
 export type SiteFilterInput = {
@@ -1689,8 +2555,6 @@ export type SiteFilterInput = {
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>,
   port?: Maybe<IntQueryOperatorInput>,
   host?: Maybe<StringQueryOperatorInput>,
-  polyfill?: Maybe<BooleanQueryOperatorInput>,
-  pathPrefix?: Maybe<StringQueryOperatorInput>,
   buildTime?: Maybe<DateQueryOperatorInput>,
 };
 
@@ -1708,8 +2572,8 @@ export type SitePage = Node & {
   parent?: Maybe<Node>,
   children: Array<Node>,
   internal: Internal,
-  path?: Maybe<Scalars['String']>,
   internalComponentName?: Maybe<Scalars['String']>,
+  path?: Maybe<Scalars['String']>,
   component?: Maybe<Scalars['String']>,
   componentChunkName?: Maybe<Scalars['String']>,
   isCreatedByStatefulCreatePages?: Maybe<Scalars['Boolean']>,
@@ -1832,8 +2696,8 @@ export type SitePageFieldsEnum =
   'internal___mediaType' |
   'internal___owner' |
   'internal___type' |
-  'path' |
   'internalComponentName' |
+  'path' |
   'component' |
   'componentChunkName' |
   'isCreatedByStatefulCreatePages' |
@@ -1887,6 +2751,13 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___display' |
   'pluginCreator___pluginOptions___icon' |
   'pluginCreator___pluginOptions___fileName' |
+  'pluginCreator___pluginOptions___apiKey' |
+  'pluginCreator___pluginOptions___serviceId' |
+  'pluginCreator___pluginOptions___endpoint' |
+  'pluginCreator___pluginOptions___query___limit' |
+  'pluginCreator___pluginOptions___fonts' |
+  'pluginCreator___pluginOptions___fonts___family' |
+  'pluginCreator___pluginOptions___fonts___variants' |
   'pluginCreator___pluginOptions___pathCheck' |
   'pluginCreator___nodeAPIs' |
   'pluginCreator___browserAPIs' |
@@ -1916,8 +2787,8 @@ export type SitePageFilterInput = {
   parent?: Maybe<NodeFilterInput>,
   children?: Maybe<NodeFilterListInput>,
   internal?: Maybe<InternalFilterInput>,
-  path?: Maybe<StringQueryOperatorInput>,
   internalComponentName?: Maybe<StringQueryOperatorInput>,
+  path?: Maybe<StringQueryOperatorInput>,
   component?: Maybe<StringQueryOperatorInput>,
   componentChunkName?: Maybe<StringQueryOperatorInput>,
   isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>,
@@ -2082,6 +2953,13 @@ export type SitePluginFieldsEnum =
   'pluginOptions___display' |
   'pluginOptions___icon' |
   'pluginOptions___fileName' |
+  'pluginOptions___apiKey' |
+  'pluginOptions___serviceId' |
+  'pluginOptions___endpoint' |
+  'pluginOptions___query___limit' |
+  'pluginOptions___fonts' |
+  'pluginOptions___fonts___family' |
+  'pluginOptions___fonts___variants' |
   'pluginOptions___pathCheck' |
   'nodeAPIs' |
   'browserAPIs' |
@@ -2207,6 +3085,11 @@ export type SitePluginPluginOptions = {
   display?: Maybe<Scalars['String']>,
   icon?: Maybe<Scalars['String']>,
   fileName?: Maybe<Scalars['String']>,
+  apiKey?: Maybe<Scalars['String']>,
+  serviceId?: Maybe<Scalars['String']>,
+  endpoint?: Maybe<Scalars['String']>,
+  query?: Maybe<SitePluginPluginOptionsQuery>,
+  fonts?: Maybe<Array<Maybe<SitePluginPluginOptionsFonts>>>,
   pathCheck?: Maybe<Scalars['Boolean']>,
 };
 
@@ -2220,7 +3103,34 @@ export type SitePluginPluginOptionsFilterInput = {
   display?: Maybe<StringQueryOperatorInput>,
   icon?: Maybe<StringQueryOperatorInput>,
   fileName?: Maybe<StringQueryOperatorInput>,
+  apiKey?: Maybe<StringQueryOperatorInput>,
+  serviceId?: Maybe<StringQueryOperatorInput>,
+  endpoint?: Maybe<StringQueryOperatorInput>,
+  query?: Maybe<SitePluginPluginOptionsQueryFilterInput>,
+  fonts?: Maybe<SitePluginPluginOptionsFontsFilterListInput>,
   pathCheck?: Maybe<BooleanQueryOperatorInput>,
+};
+
+export type SitePluginPluginOptionsFonts = {
+  family?: Maybe<Scalars['String']>,
+  variants?: Maybe<Array<Maybe<Scalars['String']>>>,
+};
+
+export type SitePluginPluginOptionsFontsFilterInput = {
+  family?: Maybe<StringQueryOperatorInput>,
+  variants?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePluginPluginOptionsFontsFilterListInput = {
+  elemMatch?: Maybe<SitePluginPluginOptionsFontsFilterInput>,
+};
+
+export type SitePluginPluginOptionsQuery = {
+  limit?: Maybe<Scalars['Int']>,
+};
+
+export type SitePluginPluginOptionsQueryFilterInput = {
+  limit?: Maybe<IntQueryOperatorInput>,
 };
 
 export type SitePluginSortInput = {
@@ -2267,6 +3177,23 @@ export type SiteTitleQueryQueryVariables = {};
 
 
 export type SiteTitleQueryQuery = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+
+export type WorksQueryVariables = {};
+
+
+export type WorksQuery = { allMicrocmsGraphic: { edges: Array<{ node: (
+        Pick<MicrocmsGraphic, 'tag' | 'publishedAt'>
+        & { image: Maybe<Pick<MicrocmsGraphicImage, 'url'>> }
+      ) }> }, allMicrocmsPhotograph: { edges: Array<{ node: (
+        Pick<MicrocmsPhotograph, 'publishedAt' | 'tag'>
+        & { image: Maybe<Pick<MicrocmsPhotographImage, 'url'>> }
+      ) }> }, allMicrocmsIllustrator: { edges: Array<{ node: (
+        Pick<MicrocmsIllustrator, 'publishedAt' | 'tag'>
+        & { image: Maybe<Pick<MicrocmsIllustratorImage, 'url'>> }
+      ) }> }, allMicrocmsWeb: { edges: Array<{ node: (
+        Pick<MicrocmsWeb, 'publishedAt' | 'tag' | 'url'>
+        & { image: Maybe<Pick<MicrocmsWebImage, 'url'>> }
+      ) }> } };
 
 export type Unnamed_2_QueryVariables = {};
 

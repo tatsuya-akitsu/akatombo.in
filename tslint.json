@@ -1,21 +1,24 @@
 {
-  "defaultSeverity": "error",
-  "extends": [
-      "tslint:recommended"
-  ],
-  "jsRules": {},
-  "rules": {
-      "interface-name": [ "never-prefix" ],
-      "member-access": [
-          false
-      ],
-      "ordered-imports": [
-          false
-      ],
-      "no-console": [
-          false
-      ],
-      "no-var-requires": false
-  },
-  "rulesDirectory": []
+    "defaultSeverity": "error",
+    "extends": [
+      "tslint-config-airbnb",
+      "tslint-config-prettier"
+    ],
+    "rulesDirectory": [
+      "tslint-plugin-prettier"
+    ],
+    "rules": {
+        "interface-name": [ "never-prefix" ],
+        "member-access": [ false ],
+        "ordered-imports": [ false ],
+        "no-console": [ false ],
+        "prettier": true,
+        "max-line-length": [ true, 120 ],
+        "object-shorthand-properties-first": false,
+        "radix": false,
+        "ter-arrow-parens": false,
+        "no-boolean-literal-compare": true,
+        "import-name": false,
+        "no-var-requires": false
+    }
 }
