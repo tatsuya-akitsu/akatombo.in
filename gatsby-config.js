@@ -29,57 +29,57 @@ module.exports = {
     },
     `gatsby-plugin-typescript`,
     {
-      resolve: 'gatsby-plugin-graphql-codegen',
+      resolve: "gatsby-plugin-graphql-codegen",
       options: {
-        fileName: `types/graphql-types.d.ts`
-      }
+        fileName: `types/graphql-types.d.ts`,
+      },
     },
     {
       resolve: `gatsby-plugin-styled-components`,
-      options: {}
+      options: {},
     },
     {
       resolve: "gatsby-source-microcms",
       options: {
-        apiKey: 'e1476c41-e822-4e49-8675-fa2ac1200d1e',
-        serviceId: 'akatombo',
-        endpoint: 'photograph',
+        apiKey: "e1476c41-e822-4e49-8675-fa2ac1200d1e",
+        serviceId: "akatombo",
+        endpoint: "photograph",
         query: {
-          limit: 100
-        }
+          limit: 100,
+        },
       },
     },
     {
       resolve: "gatsby-source-microcms",
       options: {
-        apiKey: 'e1476c41-e822-4e49-8675-fa2ac1200d1e',
-        serviceId: 'akatombo',
-        endpoint: 'graphic',
+        apiKey: "e1476c41-e822-4e49-8675-fa2ac1200d1e",
+        serviceId: "akatombo",
+        endpoint: "graphic",
         query: {
-          limit: 100
-        }
+          limit: 100,
+        },
       },
     },
     {
       resolve: "gatsby-source-microcms",
       options: {
-        apiKey: 'e1476c41-e822-4e49-8675-fa2ac1200d1e',
-        serviceId: 'akatombo',
-        endpoint: 'illustrator',
+        apiKey: "e1476c41-e822-4e49-8675-fa2ac1200d1e",
+        serviceId: "akatombo",
+        endpoint: "illustrator",
         query: {
-          limit: 100
-        }
+          limit: 100,
+        },
       },
     },
     {
       resolve: "gatsby-source-microcms",
       options: {
-        apiKey: 'e1476c41-e822-4e49-8675-fa2ac1200d1e',
-        serviceId: 'akatombo',
-        endpoint: 'web',
+        apiKey: "e1476c41-e822-4e49-8675-fa2ac1200d1e",
+        serviceId: "akatombo",
+        endpoint: "web",
         query: {
-          limit: 100
-        }
+          limit: 100,
+        },
       },
     },
     {
@@ -88,18 +88,18 @@ module.exports = {
         fonts: [
           {
             family: `Noto Sans JP`,
-            variants: [`100`, `300`, `400`, `500`, `700`, `900`]
+            variants: [`100`, `300`, `400`, `500`, `700`, `900`],
           },
           {
             family: `Karla`,
-            variants: [`100`, `300`, `400`, `500`, `700`, `900`]
+            variants: [`100`, `300`, `400`, `500`, `700`, `900`],
           },
           {
             family: `Rubik`,
-            variants: [`300`, `400`, `500`, `700`]
+            variants: [`300`, `400`, `500`, `700`],
           },
         ],
       },
-    }
+    },
   ],
 }

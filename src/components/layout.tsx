@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+// import { useStaticQuery, graphql } from "gatsby"
 import GlobalStyle from '../styles/globalStyle'
 
 import Header from '../components/molecules/header'
@@ -9,15 +9,15 @@ import HomeAboutSection from '../components/organisms/HomeAbout'
 import HomeWorksSection from '../components/organisms/HomeWorks'
 
 const Layout = ({ children }: any) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  // const data = useStaticQuery(graphql`
+  //   query SiteTitleQuery {
+  //     site {
+  //       siteMetadata {
+  //         title
+  //       }
+  //     }
+  //   }
+  // `)
 
   return (
     <>

@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: #F9FAFF;
+    background: ${BASE_WHITE_COLOR};
     color: ${BASE_TEXT_COLOR};
     font-family: ${FONT_INIT};
     font-size: 1.6rem;

@@ -67,7 +67,7 @@ const GlobalNav: React.FC = () => (
               {!item.isBlank ? (
                 <Link to={item.target}>{item.label}</Link>
               ) : (
-                <a href={item.target} target="_blank">
+                <a href={item.target} target="_blank" rel="noopener noreferrer">
                   {item.label}
                 </a>
               )}
