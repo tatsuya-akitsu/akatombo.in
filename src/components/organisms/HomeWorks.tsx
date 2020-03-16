@@ -61,23 +61,48 @@ const StyledContent = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  margin-top: .8rem;
+  margin-top: 4.8rem;
 `
 
 const StyledContentItem = styled.div`
-  margin-top: 4rem;
+  position: relative;
   padding: 4.2rem 2.8rem;
   width: calc(33.3% - 1.6rem);
-  background: #F3F4F6;
+  height: 46rem;
+  background: #1C3144;
 
-  > img {
+  &::before {
+    content: '';
     display: block;
-    margin: 0 auto;
-    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 1.4rem);
+    height: calc(100% + 1.4rem);
+    border: 2px solid #F0F3F4;
+    z-index: -1;
   }
 
   &:nth-child(3n - 1) { margin-top: 8rem; }
   &:nth-child(3n) { margin-top: 16rem; }
+`
+
+const StyledImage = styled.div`
+  position: absolute;
+  top: -3.2rem;
+  left: -3.2rem;
+  width: 90%;
+  height: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 56.25%;
+  }
 `
 
 const HomeWorksSection: React.FC<Props> = () => {
@@ -183,9 +208,17 @@ const HomeWorksSection: React.FC<Props> = () => {
         </StyledTabs>
         <StyledContent>
           {state.web.map((item: any, index: number) => {
+            const background: { [key: string]: string } = {
+              backgroundImage: `url(${item.node.image.url})`,
+            }
+
             return (
               <StyledContentItem key={index}>
-                <img src={item.node.image.url} alt="" />
+                <StyledImage style={background}></StyledImage>
+                <div>
+                  <p>{item.node.tag}</p>
+                  <p>{item.node.publishedAt}</p>
+                </div>
               </StyledContentItem>
             )
           })}
