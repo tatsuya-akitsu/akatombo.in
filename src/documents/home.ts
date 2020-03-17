@@ -21,10 +21,10 @@ export default {
   },
   works: {
     tabs: [
-      { label: "Web", icon: "develop" },
-      { label: "Graphic", icon: "graphic" },
-      { label: "Illustration", icon: "illustration" },
-      { label: "Photograph", icon: "photograph" },
+      { label: "Web", icon: "develop", target: "web" },
+      { label: "Graphic", icon: "graphic", target: "graphic" },
+      { label: "Illustration", icon: "illustration", target: "illustration" },
+      { label: "Photograph", icon: "photograph", target: "photograph" },
     ],
   },
 }

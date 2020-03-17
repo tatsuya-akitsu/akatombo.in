@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import { MixinInner } from "../../styles/style"
-import { BASE_TEXT_COLOR, RUBIK } from "../../styles/.style"
+import { BASE_TEXT_COLOR, BASE_WHITE_COLOR, RUBIK } from "../../styles/.style"
 import { WorksQuery } from "../../../types/graphql-types"
 
 import myLabels from "../../documents/home"
@@ -66,9 +66,10 @@ const StyledContent = styled.div`
 
 const StyledContentItem = styled.div`
   position: relative;
+  margin: 3.2rem 0 0 3.2rem;
   padding: 4.2rem 2.8rem;
-  width: calc(33.3% - 1.6rem);
-  height: 46rem;
+  width: calc(30% - 1.6rem);
+  height: 32rem;
   background: #1C3144;
 
   &::before {
@@ -84,8 +85,8 @@ const StyledContentItem = styled.div`
     z-index: -1;
   }
 
-  &:nth-child(3n - 1) { margin-top: 8rem; }
-  &:nth-child(3n) { margin-top: 16rem; }
+  &:nth-child(3n - 1) { margin-top: 11.2rem; }
+  &:nth-child(3n) { margin-top: 19.2rem; }
 `
 
 const StyledImage = styled.div`
@@ -96,12 +97,38 @@ const StyledImage = styled.div`
   height: auto;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: center top;
 
   &::before {
     content: '';
     display: block;
     padding-top: 56.25%;
+  }
+`
+
+const StyledWorkInfo = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+
+  p:nth-of-type(1) {
+    display: inline-block;
+    padding: .8rem 1.6rem;
+    font-family: ${RUBIK};
+    font-size: 1.6rem;
+    letter-spacing: .067rem;
+    line-height: 1;
+    color: ${BASE_TEXT_COLOR};
+    background: ${BASE_WHITE_COLOR};
+    border-radius: 2px;
+  }
+
+  p:nth-of-type(2) {
+    padding-top: 1.6rem;
+    font-size: 1.2rem:
+    letter-spacing: .04rem;
+    line-height: 1.4;
+    color: ${BASE_WHITE_COLOR};
   }
 `
 
@@ -111,6 +138,9 @@ const HomeWorksSection: React.FC<Props> = () => {
     illustration: [],
     graphic: [],
     photograph: [],
+  })
+  const [initWork, setInitWork] = useState({
+    work: [],
   })
 
   const data = useStaticQuery(graphql`
@@ -171,22 +201,35 @@ const HomeWorksSection: React.FC<Props> = () => {
       photograph: data.allMicrocmsPhotograph.edges,
     }
     setWorksData(Object.assign({}, newState))
+    const initWork = {
+      work: data.allMicrocmsWeb.edges,
+    }
+    setInitWork(Object.assign({}, initWork))
   }, [])
 
-  // const handleGetWorks = (val: String) => {
-  //   switch (val) {
-  //     case "web":
-  //       getWebData()
-  //     case "Illustration":
-  //       getIllustrationData()
-  //     case "Graphic":
-  //       getGraphicData()
-  //     case "Photograph":
-  //       getPhotographData()
-  //     default:
-  //       return
-  //   }
-  // }
+  const handleGetWorks = (val: string) => {
+    if (val === "web") {
+      const newWork = {
+        work: state.web,
+      }
+      setInitWork(Object.assign({}, newWork))
+    } else if (val === "illustration") {
+      const newWork = {
+        work: state.illustration,
+      }
+      setInitWork(Object.assign({}, newWork))
+    } else if (val === "graphic") {
+      const newWork = {
+        work: state.graphic,
+      }
+      setInitWork(Object.assign({}, newWork))
+    } else if (val === "photograph") {
+      const newWork = {
+        work: state.photograph,
+      }
+      setInitWork(Object.assign({}, newWork))
+    }
+  }
 
   return (
     <StyledSection>
@@ -195,7 +238,7 @@ const HomeWorksSection: React.FC<Props> = () => {
           <ul>
             {myLabels.works.tabs.map((item: any, index: number) => {
               return (
-                <li key={index}>
+                <li key={index} onClick={() => handleGetWorks(item.target)}>
                   <img
                     src={require(`../../images/home/icon_works_${item.icon}.svg`)}
                     alt=""
@@ -207,7 +250,7 @@ const HomeWorksSection: React.FC<Props> = () => {
           </ul>
         </StyledTabs>
         <StyledContent>
-          {state.web.map((item: any, index: number) => {
+          {initWork.work.map((item: any, index: number) => {
             const background: { [key: string]: string } = {
               backgroundImage: `url(${item.node.image.url})`,
             }
@@ -215,10 +258,10 @@ const HomeWorksSection: React.FC<Props> = () => {
             return (
               <StyledContentItem key={index}>
                 <StyledImage style={background}></StyledImage>
-                <div>
+                <StyledWorkInfo>
                   <p>{item.node.tag}</p>
                   <p>{item.node.publishedAt}</p>
-                </div>
+                </StyledWorkInfo>
               </StyledContentItem>
             )
           })}
