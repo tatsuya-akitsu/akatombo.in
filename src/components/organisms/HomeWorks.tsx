@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import * as dayjs from "dayjs"
+const dayjs = require("dayjs")
 import styled from "styled-components"
 import { MixinInner } from "../../styles/style"
 import { BASE_TEXT_COLOR, BASE_WHITE_COLOR, RUBIK } from "../../styles/.style"
@@ -10,6 +10,14 @@ import myLabels from "../../documents/home"
 
 type Props = {
   data: WorksQuery
+}
+
+interface IAll {
+  all: Array<any>
+}
+
+interface IWork {
+  work: Array<any>
 }
 
 const StyledSection = styled.div`
@@ -107,7 +115,7 @@ const StyledImage = styled.div`
   &::before {
     content: "";
     display: block;
-    padding-top: 56.25%;
+    padding-top: 71%;
   }
 `
 
@@ -118,10 +126,10 @@ const StyledWorkInfo = styled.div`
 
   p:nth-of-type(1) {
     display: inline-block;
-    padding: .8rem 1.6rem;
+    padding: 0.6rem 1.2rem;
     font-family: ${RUBIK};
-    font-size: 1.6rem;
-    letter-spacing: .067rem;
+    font-size: 1.4rem;
+    letter-spacing: 0.067rem;
     line-height: 1;
     color: ${BASE_TEXT_COLOR};
     background: ${BASE_WHITE_COLOR};
@@ -130,8 +138,8 @@ const StyledWorkInfo = styled.div`
 
   p:nth-of-type(2) {
     padding-top: 1.6rem;
-    font-size: 1.2rem:
-    letter-spacing: .04rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.04rem;
     line-height: 1.4;
     color: ${BASE_WHITE_COLOR};
   }
@@ -144,9 +152,8 @@ const HomeWorksSection: React.FC<Props> = () => {
     graphic: [],
     photograph: [],
   })
-  const [initWork, setInitWork] = useState({
-    work: [],
-  })
+  const [initWork, setInitWork] = useState<IWork[]>([])
+  const [allWork, setAllWork] = useState<IAll[]>([])
 
   const data = useStaticQuery(graphql`
     query works {
@@ -199,6 +206,17 @@ const HomeWorksSection: React.FC<Props> = () => {
   `)
 
   useEffect(() => {
+    const cmsData = data.allMicrocmsWeb.edges.concat(
+      data.allMicrocmsIllustrator.edges,
+      data.allMicrocmsGraphic.edges,
+      data.allMicrocmsPhotograph.edges
+    )
+    console.log(cmsData)
+    const sortData = [...cmsData].sort(
+      (a: any, b: any) => dayjs(b.node.publishedAt) - dayjs(a.node.publishedAt)
+    )
+    const allData = sortData.slice(0, 12)
+    setAllWork(allData)
     const newState = {
       web: data.allMicrocmsWeb.edges,
       illustration: data.allMicrocmsIllustrator.edges,
@@ -206,33 +224,18 @@ const HomeWorksSection: React.FC<Props> = () => {
       photograph: data.allMicrocmsPhotograph.edges,
     }
     setWorksData(Object.assign({}, newState))
-    const initWork = {
-      work: data.allMicrocmsWeb.edges,
-    }
-    setInitWork(Object.assign({}, initWork))
+    setInitWork(data.allMicrocmsWeb.edges)
   }, [])
 
   const handleGetWorks = (val: string) => {
     if (val === "web") {
-      const newWork = {
-        work: state.web,
-      }
-      setInitWork(Object.assign({}, newWork))
+      setInitWork(state.web)
     } else if (val === "illustration") {
-      const newWork = {
-        work: state.illustration,
-      }
-      setInitWork(Object.assign({}, newWork))
+      setInitWork(state.illustration)
     } else if (val === "graphic") {
-      const newWork = {
-        work: state.graphic,
-      }
-      setInitWork(Object.assign({}, newWork))
+      setInitWork(state.graphic)
     } else if (val === "photograph") {
-      const newWork = {
-        work: state.photograph,
-      }
-      setInitWork(Object.assign({}, newWork))
+      setInitWork(state.photograph)
     }
   }
 
@@ -255,7 +258,7 @@ const HomeWorksSection: React.FC<Props> = () => {
           </ul>
         </StyledTabs>
         <StyledContent>
-          {initWork.work.map((item: any, index: number) => {
+          {allWork.map((item: any, index: number) => {
             const background: { [key: string]: string } = {
               backgroundImage: `url(${item.node.image.url})`,
             }
@@ -265,7 +268,7 @@ const HomeWorksSection: React.FC<Props> = () => {
                 <StyledImage style={background}></StyledImage>
                 <StyledWorkInfo>
                   <p>{item.node.tag}</p>
-                  <p>{item.node.publishedAt}</p>
+                  <p>{dayjs(item.node.publishedAt).format("YYYY/MM/DD")}</p>
                 </StyledWorkInfo>
               </StyledContentItem>
             )
