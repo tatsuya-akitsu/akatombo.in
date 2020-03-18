@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import * as dayjs from "dayjs"
 import styled from "styled-components"
 import { MixinInner } from "../../styles/style"
 import { BASE_TEXT_COLOR, BASE_WHITE_COLOR, RUBIK } from "../../styles/.style"
@@ -70,10 +71,10 @@ const StyledContentItem = styled.div`
   padding: 4.2rem 2.8rem;
   width: calc(30% - 1.6rem);
   height: 32rem;
-  background: #1C3144;
+  background: #1c3144;
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     top: 50%;
@@ -81,12 +82,16 @@ const StyledContentItem = styled.div`
     transform: translate(-50%, -50%);
     width: calc(100% + 1.4rem);
     height: calc(100% + 1.4rem);
-    border: 2px solid #F0F3F4;
+    border: 2px solid #f0f3f4;
     z-index: -1;
   }
 
-  &:nth-child(3n - 1) { margin-top: 11.2rem; }
-  &:nth-child(3n) { margin-top: 19.2rem; }
+  &:nth-child(3n - 1) {
+    margin-top: 11.2rem;
+  }
+  &:nth-child(3n) {
+    margin-top: 19.2rem;
+  }
 `
 
 const StyledImage = styled.div`
@@ -100,7 +105,7 @@ const StyledImage = styled.div`
   background-position: center top;
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     padding-top: 56.25%;
   }
