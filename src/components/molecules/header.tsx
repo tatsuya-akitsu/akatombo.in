@@ -3,14 +3,13 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { MixinInner } from "../../styles/style"
 import GlobalNav from "./globalNav"
-import name from "../../images/name.svg"
-import logo from "../../images/icon_new.svg"
+import logo from "../../images/logo.svg"
 
 const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  padding: 2.4rem 0;
+  padding: 3.2rem 0;
   width: 100%;
   z-index: 10000;
 `
@@ -29,18 +28,7 @@ const StyledLogo = styled.span`
   display: inline-block;
   vertical-align: middle;
   margin-right: 1.2rem;
-  width: 1.8rem;
-
-  > img {
-    display: block;
-    width: 100%;
-  }
-`
-
-const StyledIcon = styled.span`
-  display: inline-block;
-  vertical-align: middle;
-  width: 14rem;
+  width: 23.6rem;
 
   > img {
     display: block;
@@ -55,9 +43,6 @@ const Header: React.FC = () => (
         <StyledLogo>
           <img src={logo} alt="" />
         </StyledLogo>
-        <StyledIcon>
-          <img src={name} alt="" />
-        </StyledIcon>
       </Link>
       <GlobalNav />
     </StyledInner>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react"
 import styled from "styled-components"
-import { BASE_TEXT_COLOR, KARLA, MAX_WIDTH } from "../../styles/.style"
+import { BASE_TEXT_COLOR, MULI, MAX_WIDTH } from "../../styles/.style"
 import myLabels from "../../documents/home"
 import HeaderThumbnail from "../atoms/thumbnail"
 
@@ -8,18 +8,6 @@ const StyledSection = styled.div`
   position: relative;
   width: 100%;
   height: ${window.innerHeight}px;
-
-  p {
-    position: absolute;
-    padding-top: 24rem;
-    font-family: ${KARLA};
-    font-size: 1.4rem;
-    letter-spacing: 0.1rem;
-    line-height: 1.6;
-    text-align: center;
-    width: 100%;
-    height: ${window.innerHeight}px;
-  }
 `
 
 const StyledInner = styled.div`
@@ -39,8 +27,9 @@ const StyledInner = styled.div`
     span {
       display: block;
       padding-bottom: 3.2rem;
-      font-size: 1.4rem;
-      letter-spacing: 0.043rem;
+      font-family: ${MULI};
+      font-size: 1.6rem;
+      letter-spacing: 0.027rem;
       line-height: 1.4;
       font-weight: bold;
       color: ${BASE_TEXT_COLOR};
@@ -49,6 +38,7 @@ const StyledInner = styled.div`
     h2 {
       display: inline-block;
       vertical-align: text-bottom;
+      font-family: ${MULI};
       font-size: 6rem;
       letter-spacing: 0.16rem;
       line-height: 1.2;

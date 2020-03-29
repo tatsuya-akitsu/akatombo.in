@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 const dayjs = require("dayjs")
 import styled from "styled-components"
-import { MixinInner } from "../../styles/style"
-import { BASE_TEXT_COLOR, BASE_WHITE_COLOR, RUBIK } from "../../styles/.style"
+import {
+  MAX_WIDTH,
+  BASE_TEXT_COLOR,
+  BASE_WHITE_COLOR,
+  MULI,
+} from "../../styles/.style"
 import { WorksQuery } from "../../../types/graphql-types"
 
 import myLabels from "../../documents/home"
@@ -25,24 +29,28 @@ const StyledSection = styled.div`
   width: 100%;
 
   > div {
-    ${MixinInner}
+    position: relative;
+    margin: 0;
+    padding: 0 32px;
+    width: 100%;
+    max-width: ${MAX_WIDTH}px;
   }
 `
 
 const StyledTabs = styled.div`
-  border-bottom: 2px solid #f0f3f4;
+  border-bottom: 1px solid ${BASE_TEXT_COLOR};
 
   ul {
     list-style-type: none;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding-bottom: 3.2rem;
   }
 
   li {
     cursor: pointer;
     margin-right: 3.2rem;
-    padding: 1.2rem 0;
     font-size: 0;
   }
 
@@ -57,8 +65,8 @@ const StyledTabs = styled.div`
     width: 2.4rem;
   }
   li > span {
-    font-family: ${RUBIK};
-    font-size: 2rem;
+    font-family: ${MULI};
+    font-size: 1.6rem;
     letter-spacing: 0.13rem;
     line-height: 1;
     color: ${BASE_TEXT_COLOR};
@@ -66,82 +74,40 @@ const StyledTabs = styled.div`
 `
 
 const StyledContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: 4.8rem;
+  column-count: 3;
+  column-gap: 3.2rem;
+  margin-top: 8.2rem;
 `
 
 const StyledContentItem = styled.div`
+  display: inline-block;
   position: relative;
-  margin: 3.2rem 0 0 3.2rem;
-  padding: 4.2rem 2.8rem;
-  width: calc(30% - 1.6rem);
-  height: 32rem;
-  background: #1c3144;
+  margin-bottom: 6.4rem;
+  width: 100%;
 
-  &::before {
-    content: "";
+  img {
     display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(100% + 1.4rem);
-    height: calc(100% + 1.4rem);
-    border: 2px solid #f0f3f4;
-    z-index: -1;
-  }
-
-  &:nth-child(3n - 1) {
-    margin-top: 11.2rem;
-  }
-  &:nth-child(3n) {
-    margin-top: 19.2rem;
-  }
-`
-
-const StyledImage = styled.div`
-  position: absolute;
-  top: -3.2rem;
-  left: -3.2rem;
-  width: 90%;
-  height: auto;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top;
-
-  &::before {
-    content: "";
-    display: block;
-    padding-top: 71%;
+    width: 100%;
   }
 `
 
 const StyledWorkInfo = styled.div`
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-
   p:nth-of-type(1) {
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    font-family: ${RUBIK};
+    padding-top: 2rem;
+    font-family: ${MULI};
     font-size: 1.4rem;
     letter-spacing: 0.067rem;
     line-height: 1;
     color: ${BASE_TEXT_COLOR};
-    background: ${BASE_WHITE_COLOR};
-    border-radius: 2px;
   }
 
   p:nth-of-type(2) {
-    padding-top: 1.6rem;
+    padding-top: 1.2rem;
+    font-family: ${MULI};
     font-size: 1.2rem;
     letter-spacing: 0.04rem;
     line-height: 1.4;
-    color: ${BASE_WHITE_COLOR};
+    color: #717377;
   }
 `
 
@@ -259,15 +225,17 @@ const HomeWorksSection: React.FC<Props> = () => {
         </StyledTabs>
         <StyledContent>
           {allWork.map((item: any, index: number) => {
-            const background: { [key: string]: string } = {
-              backgroundImage: `url(${item.node.image.url})`,
-            }
-
             return (
               <StyledContentItem key={index}>
-                <StyledImage style={background}></StyledImage>
+                {item.node.url !== undefined ? (
+                  <a href={item.node.url} target="_blank">
+                    <img src={item.node.image.url} alt="" />
+                  </a>
+                ) : (
+                  <img src={item.node.image.url} alt="" />
+                )}
                 <StyledWorkInfo>
-                  <p>{item.node.tag}</p>
+                  <p>{myLabels.works.label.replace("tag", item.node.tag)}</p>
                   <p>{dayjs(item.node.publishedAt).format("YYYY/MM/DD")}</p>
                 </StyledWorkInfo>
               </StyledContentItem>

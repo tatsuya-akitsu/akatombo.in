@@ -1,20 +1,15 @@
 import React from "react"
 import PropTypes from "prop-types"
-import GlobalStyle from '../styles/globalStyle'
+import GlobalStyle from "../styles/globalStyle"
 
-import Header from '../components/molecules/header'
-import HomeIntroSection from '../components/organisms/HomeIntro'
-import HomeAboutSection from '../components/organisms/HomeAbout'
-import HomeWorksSection from '../components/organisms/HomeWorks'
+import Header from "../components/molecules/header"
 
-const Layout = () => {
+const Layout = ({ children }: any) => {
   return (
     <>
       <GlobalStyle />
       <Header />
-      <HomeIntroSection />
-      <HomeAboutSection />
-      <HomeWorksSection />
+      <main>{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with
         {` `}
@@ -22,6 +17,10 @@ const Layout = () => {
       </footer>
     </>
   )
+}
+
+Layout.prototype = {
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout

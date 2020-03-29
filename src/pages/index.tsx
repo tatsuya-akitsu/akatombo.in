@@ -1,21 +1,38 @@
-import React from "react"
-import { Link } from "gatsby"
+import React, { useEffect, useRef } from "react"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import HomeIntroSection from '../components/organisms/HomeIntro'
+import HomeAboutSection from '../components/organisms/HomeAbout'
+import HomeWorksSection from '../components/organisms/HomeWorks'
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const StyledBackground = styled.div`
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #F3F4F6;
+`
+
+const IndexPage = () => {
+  const backgroundEl = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (backgroundEl && backgroundEl.current) {
+      backgroundEl.current.style.top = `${window.innerHeight + 256}px`
+      backgroundEl.current.style.height = `${window.innerHeight * 1.4}px`
+    }
+  })
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <HomeIntroSection />
+      <StyledBackground ref={backgroundEl}></StyledBackground>
+      <HomeAboutSection />
+      <HomeWorksSection />
+    </Layout>
+  )
+}
 
 export default IndexPage

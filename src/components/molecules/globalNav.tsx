@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import { RUBIK, BASE_TEXT_COLOR } from "../../styles/.style"
+import { BASE_TEXT_COLOR, EASE_IN_OUT_QUART } from "../../styles/.style"
 import myLabels from "../../documents/common"
 import dragonFly from "../../images/dragon_fly.svg"
 
@@ -22,7 +22,6 @@ const StyledNav = styled.div`
   }
 
   li {
-    position: relative;
     padding: 0 1.6rem;
   }
 
@@ -34,7 +33,6 @@ const StyledNav = styled.div`
     vertical-align: middle;
     position: relative;
     padding: 0 1.6rem;
-    font-family: ${RUBIK};
     font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: 0.027rem;
@@ -42,18 +40,40 @@ const StyledNav = styled.div`
     color: ${BASE_TEXT_COLOR};
   }
 
-  li:not(:nth-last-of-type(1))::after {
+  a::before,
+  a::after {
     content: "";
     position: absolute;
     top: 50%;
-    left: 100%;
-    transform: translate(-50%, -50%);
+    left: 0;
+    transform: translate(0, -50%);
     display: inline-block;
     vertical-align: middle;
-    width: 2.4rem;
     height: 0.2rem;
     border-radius: 1px;
-    background: ${BASE_TEXT_COLOR};
+    transition: ${EASE_IN_OUT_QUART};
+  }
+
+  a::before {
+    width: 100%;
+    background: #d4b079;
+  }
+
+  a::after {
+    width: 0%;
+    background: #f03434;
+  }
+
+  a:hover {
+    &::before {
+      width: 0%;
+      transition: ${EASE_IN_OUT_QUART};
+    }
+
+    &::after {
+      width: 100%;
+      transition: ${EASE_IN_OUT_QUART};
+    }
   }
 `
 

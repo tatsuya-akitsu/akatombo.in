@@ -13,6 +13,13 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `fonts`,
+        path: `${__dirname}/src/fonts`
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -90,13 +97,16 @@ module.exports = {
             family: `Noto Sans JP`,
             variants: [`100`, `300`, `400`, `500`, `700`, `900`],
           },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
           {
-            family: `Karla`,
-            variants: [`100`, `300`, `400`, `500`, `700`, `900`],
-          },
-          {
-            family: `Rubik`,
-            variants: [`300`, `400`, `500`, `700`],
+            family: `Muli`,
+            variants: [`200`, `300`, `400`, `500`, `700`, `800`, `900`],
           },
         ],
       },

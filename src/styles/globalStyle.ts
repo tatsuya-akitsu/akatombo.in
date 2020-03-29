@@ -1,7 +1,12 @@
-import { createGlobalStyle } from 'styled-components'
-import { BASE_TEXT_COLOR, BASE_WHITE_COLOR, FONT_INIT } from './.style'
+import { createGlobalStyle } from "styled-components"
+import { BASE_TEXT_COLOR, BASE_WHITE_COLOR } from "./.style"
 
 const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Tomoe Gozen';
+    src: url(${require("../fonts/tomoegozen.woff")}) format('woff');
+  }
+
   html {
     display: block;
     font-size: 62.5%;
@@ -10,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${BASE_WHITE_COLOR};
     color: ${BASE_TEXT_COLOR};
-    font-family: ${FONT_INIT};
+    font-family: 'Tomoe Gozen', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
     font-size: 1.6rem;
     height: 100%;
     line-height: 1;
