@@ -3181,6 +3181,11 @@ export type Unnamed_1_QueryVariables = {};
 
 export type Unnamed_1_Query = { placeholderImage: Maybe<{ childImageSharp: Maybe<{ fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> };
 
+export type Unnamed_2_QueryVariables = {};
+
+
+export type Unnamed_2_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
 export type WorksQueryVariables = {};
 
 
@@ -3198,10 +3203,22 @@ export type WorksQuery = { allMicrocmsWeb: { edges: Array<{ node: (
         & { image: Maybe<Pick<MicrocmsPhotographImage, 'url'>> }
       ) }> } };
 
-export type Unnamed_2_QueryVariables = {};
+export type WorksQueryVariables = {};
 
 
-export type Unnamed_2_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+export type WorksQuery = { allMicrocmsWeb: { edges: Array<{ node: (
+        Pick<MicrocmsWeb, 'publishedAt' | 'tag' | 'url'>
+        & { image: Maybe<Pick<MicrocmsWebImage, 'url'>> }
+      ) }> }, allMicrocmsIllustrator: { edges: Array<{ node: (
+        Pick<MicrocmsIllustrator, 'publishedAt' | 'tag'>
+        & { image: Maybe<Pick<MicrocmsIllustratorImage, 'url'>> }
+      ) }> }, allMicrocmsGraphic: { edges: Array<{ node: (
+        Pick<MicrocmsGraphic, 'tag' | 'publishedAt'>
+        & { image: Maybe<Pick<MicrocmsGraphicImage, 'url'>> }
+      ) }> }, allMicrocmsPhotograph: { edges: Array<{ node: (
+        Pick<MicrocmsPhotograph, 'publishedAt' | 'tag'>
+        & { image: Maybe<Pick<MicrocmsPhotographImage, 'url'>> }
+      ) }> } };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

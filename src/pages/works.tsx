@@ -1,35 +1,35 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { WorksQuery } from "../../types/graphql-types"
 const dayjs = require("dayjs")
-import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import HomeIntroSection from "../components/organisms/HomeIntro"
-import HomeAboutSection from "../components/organisms/HomeAbout"
-import HomeWorksSection from "../components/organisms/HomeWorks"
+import WorksPage from "../components/organisms/WorksPage"
 
 type Props = {
   data: WorksQuery
 }
 
-interface IAll {
+type initialState = Readonly<{
   all: Array<any>
+  web: Array<any>
+  illustration: Array<any>
+  graphic: Array<any>
+  photograph: Array<any>
+}>
+
+const initialData: initialState = {
+  all: [],
+  web: [],
+  illustration: [],
+  graphic: [],
+  photograph: [],
 }
 
-const StyledBackground = styled.div`
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #fbfbfb;
-`
+const SecondPage: React.FC<Props> = () => {
+  const [state, setState] = useState([initialData])
 
-const IndexPage: React.FC<Props> = () => {
-  const backgroundEl = useRef<HTMLDivElement>(null)
-
-  const [allWork, setAllWork] = useState<IAll[]>([])
   const data = useStaticQuery(graphql`
     query works {
       allMicrocmsWeb {
@@ -81,33 +81,35 @@ const IndexPage: React.FC<Props> = () => {
   `)
 
   useEffect(() => {
-    const cmsData = data.allMicrocmsWeb.edges.concat(
+    const allData = data.allMicrocmsWeb.edges.concat(
       data.allMicrocmsIllustrator.edges,
       data.allMicrocmsGraphic.edges,
       data.allMicrocmsPhotograph.edges
     )
-    const sortData = [...cmsData].sort(
-      (a: any, b: any) => dayjs(b.node.publishedAt) - dayjs(a.node.publishedAt)
-    )
-    const allData = sortData.slice(0, 12)
-    setAllWork(allData)
-  }, [])
 
-  useEffect(() => {
-    if (backgroundEl && backgroundEl.current) {
-      backgroundEl.current.style.top = `${window.innerHeight + 256}px`
-      backgroundEl.current.style.height = `${window.innerHeight * 1.4}px`
+    const sortable = ({ arr }: any) => {
+      return [...arr].sort(
+        (a: any, b: any) =>
+          dayjs(b.node.publishedAt) - dayjs(a.node.publishedAt)
+      )
     }
-  })
+
+    const newState: initialState = {
+      all: sortable(allData),
+      web: sortable(data.allMicrocmsWeb.edges),
+      illustration: sortable(data.allMicrocmsIllustrator.edges),
+      graphic: sortable(data.allMicrocmsGraphic.edges),
+      photograph: sortable(data.allMicrocmsPhotograph.edges),
+    }
+
+    setState([...state, newState])
+  }, [])
   return (
     <Layout>
-      <SEO title="Home" />
-      <HomeIntroSection />
-      <StyledBackground ref={backgroundEl}></StyledBackground>
-      <HomeAboutSection />
-      <HomeWorksSection data={allWork} />
+      <SEO title="Works" />
+      <WorksPage data={state}></WorksPage>
     </Layout>
   )
 }
 
-export default IndexPage
+export default SecondPage

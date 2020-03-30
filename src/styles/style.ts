@@ -1,5 +1,5 @@
-import { css } from 'styled-components'
-import { MAX_WIDTH } from './.style'
+import { css } from "styled-components"
+import { MAX_WIDTH } from "./.style"
 
 export const MixinInner = css`
   position: relative;
