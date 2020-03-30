@@ -11,25 +11,15 @@ type Props = {
   data: WorksDetailQuery
 }
 
-type initialState = Readonly<{
+interface IProps {
   all: Array<any>
   web: Array<any>
   illustration: Array<any>
   graphic: Array<any>
   photograph: Array<any>
-}>
-
-const initialData: initialState = {
-  all: [],
-  web: [],
-  illustration: [],
-  graphic: [],
-  photograph: [],
 }
 
 const SecondPage: React.FC<Props> = () => {
-  const [state, setState] = useState([initialData])
-
   const data = useStaticQuery(graphql`
     query worksDetail {
       allMicrocmsWeb {
@@ -80,30 +70,26 @@ const SecondPage: React.FC<Props> = () => {
     }
   `)
 
-  useEffect(() => {
-    const allData = data.allMicrocmsWeb.edges.concat(
-      data.allMicrocmsIllustrator.edges,
-      data.allMicrocmsGraphic.edges,
-      data.allMicrocmsPhotograph.edges
+  const allData = data.allMicrocmsWeb.edges.concat(
+    data.allMicrocmsIllustrator.edges,
+    data.allMicrocmsGraphic.edges,
+    data.allMicrocmsPhotograph.edges
+  )
+  const sortable = (arr: Array<any>) => {
+    return [...arr].sort(
+      (a: any, b: any) => dayjs(b.node.publishedAt) - dayjs(a.node.publishedAt)
     )
+  }
+  const newState = {
+    all: sortable(allData),
+    web: sortable(data.allMicrocmsWeb.edges),
+    illustration: sortable(data.allMicrocmsIllustrator.edges),
+    graphic: sortable(data.allMicrocmsGraphic.edges),
+    photograph: sortable(data.allMicrocmsPhotograph.edges),
+  }
 
-    const sortable = ({ arr }: any) => {
-      return [...arr].sort(
-        (a: any, b: any) =>
-          dayjs(b.node.publishedAt) - dayjs(a.node.publishedAt)
-      )
-    }
+  const [state, setState] = useState(newState)
 
-    const newState: initialState = {
-      all: sortable(allData),
-      web: sortable(data.allMicrocmsWeb.edges),
-      illustration: sortable(data.allMicrocmsIllustrator.edges),
-      graphic: sortable(data.allMicrocmsGraphic.edges),
-      photograph: sortable(data.allMicrocmsPhotograph.edges),
-    }
-
-    setState([...state, newState])
-  }, [])
   return (
     <Layout>
       <SEO title="Works" />

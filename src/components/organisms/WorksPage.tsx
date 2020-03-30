@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react"
-const dayjs = require("dayjs")
 import styled from "styled-components"
 import { BASE_TEXT_COLOR, MULI } from "../../styles/.style"
 import WorkItem from "../atoms/WorkItem"
 
 import myLabels from "../../documents/works"
 
-type initialType = Readonly<{ state: Array<any> }>
-const initialState: initialType = {
-  state: [],
+interface IState {
+  state: Array<any>
 }
 
 const StyledTabs = styled.div`
@@ -44,23 +42,23 @@ const StyledTabs = styled.div`
 `
 
 const WorksPage = ({ data }: any) => {
-  const [state, setState] = useState([initialState])
+  const [state, setState] = useState<IState[]>([])
 
   useEffect(() => {
-    setState([...state, data.all])
-  })
+    setState(data.all)
+  }, [])
 
   const handleGetWork = (val: string) => {
     if (val === "all") {
-      setState([...state, data.all])
+      setState(data.all)
     } else if (val === "web") {
-      setState([...state, data.web])
+      setState(data.web)
     } else if (val === "illustration") {
-      setState([...state, data.illustration])
+      setState(data.illustration)
     } else if (val === "graphic") {
-      setState([...state, data.graphic])
+      setState(data.graphic)
     } else if (val === "photograph") {
-      setState([...state, data.photograph])
+      setState(data.photograph)
     }
   }
 

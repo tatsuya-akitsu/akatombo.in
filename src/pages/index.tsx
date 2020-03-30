@@ -14,10 +14,6 @@ type Props = {
   data: WorksSummaryQuery
 }
 
-interface IAll {
-  all: Array<any>
-}
-
 const StyledBackground = styled.div`
   position: absolute;
   left: 0;
@@ -29,7 +25,6 @@ const StyledBackground = styled.div`
 const IndexPage: React.FC<Props> = () => {
   const backgroundEl = useRef<HTMLDivElement>(null)
 
-  const [allWork, setAllWork] = useState<IAll[]>([])
   const data = useStaticQuery(graphql`
     query worksSummary {
       allMicrocmsWeb {
@@ -80,18 +75,16 @@ const IndexPage: React.FC<Props> = () => {
     }
   `)
 
-  useEffect(() => {
-    const cmsData = data.allMicrocmsWeb.edges.concat(
-      data.allMicrocmsIllustrator.edges,
-      data.allMicrocmsGraphic.edges,
-      data.allMicrocmsPhotograph.edges
-    )
-    const sortData = [...cmsData].sort(
-      (a: any, b: any) => dayjs(b.node.publishedAt) - dayjs(a.node.publishedAt)
-    )
-    const allData = sortData.slice(0, 12)
-    setAllWork(allData)
-  }, [])
+  const cmsData = data.allMicrocmsWeb.edges.concat(
+    data.allMicrocmsIllustrator.edges,
+    data.allMicrocmsGraphic.edges,
+    data.allMicrocmsPhotograph.edges
+  )
+  const sortData = [...cmsData].sort(
+    (a: any, b: any) => dayjs(b.node.publishedAt) - dayjs(a.node.publishedAt)
+  )
+  const initialState = sortData.slice(0, 12)
+  const [state, setState] = useState(initialState)
 
   useEffect(() => {
     if (backgroundEl && backgroundEl.current) {
@@ -105,7 +98,7 @@ const IndexPage: React.FC<Props> = () => {
       <HomeIntroSection />
       <StyledBackground ref={backgroundEl}></StyledBackground>
       <HomeAboutSection />
-      <HomeWorksSection data={allWork} />
+      <HomeWorksSection data={state} />
     </Layout>
   )
 }
