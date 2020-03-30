@@ -152,7 +152,7 @@ const HomeAboutSection: React.FC = () => {
             <span>{myLabels.about.position}</span>
             <p>{myLabels.about.name}</p>
             <p dangerouslySetInnerHTML={{ __html: myLabels.about.text }}></p>
-            <Link to="/about">{myLabels.about.button}</Link>
+            <Link to="/about">{myLabels.button}</Link>
           </StyledInfoBody>
         </StyledInfoBox>
         <StyledThumbnail>

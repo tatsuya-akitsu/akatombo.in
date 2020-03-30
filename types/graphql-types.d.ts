@@ -3186,10 +3186,10 @@ export type Unnamed_2_QueryVariables = {};
 
 export type Unnamed_2_Query = { site: Maybe<{ siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
-export type WorksQueryVariables = {};
+export type WorksSummaryQueryVariables = {};
 
 
-export type WorksQuery = { allMicrocmsWeb: { edges: Array<{ node: (
+export type WorksSummaryQuery = { allMicrocmsWeb: { edges: Array<{ node: (
         Pick<MicrocmsWeb, 'publishedAt' | 'tag' | 'url'>
         & { image: Maybe<Pick<MicrocmsWebImage, 'url'>> }
       ) }> }, allMicrocmsIllustrator: { edges: Array<{ node: (
@@ -3203,10 +3203,10 @@ export type WorksQuery = { allMicrocmsWeb: { edges: Array<{ node: (
         & { image: Maybe<Pick<MicrocmsPhotographImage, 'url'>> }
       ) }> } };
 
-export type WorksQueryVariables = {};
+export type WorksDetailQueryVariables = {};
 
 
-export type WorksQuery = { allMicrocmsWeb: { edges: Array<{ node: (
+export type WorksDetailQuery = { allMicrocmsWeb: { edges: Array<{ node: (
         Pick<MicrocmsWeb, 'publishedAt' | 'tag' | 'url'>
         & { image: Maybe<Pick<MicrocmsWebImage, 'url'>> }
       ) }> }, allMicrocmsIllustrator: { edges: Array<{ node: (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { WorksQuery } from "../../types/graphql-types"
+import { WorksDetailQuery } from "../../types/graphql-types"
 const dayjs = require("dayjs")
 
 import Layout from "../components/layout"
@@ -8,7 +8,7 @@ import SEO from "../components/seo"
 import WorksPage from "../components/organisms/WorksPage"
 
 type Props = {
-  data: WorksQuery
+  data: WorksDetailQuery
 }
 
 type initialState = Readonly<{
@@ -31,7 +31,7 @@ const SecondPage: React.FC<Props> = () => {
   const [state, setState] = useState([initialData])
 
   const data = useStaticQuery(graphql`
-    query works {
+    query worksDetail {
       allMicrocmsWeb {
         edges {
           node {

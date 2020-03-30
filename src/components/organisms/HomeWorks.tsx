@@ -1,9 +1,16 @@
 import React from "react"
+import { Link } from "gatsby"
 const dayjs = require("dayjs")
 import styled from "styled-components"
-import { MAX_WIDTH, BASE_TEXT_COLOR, MULI } from "../../styles/.style"
+import {
+  MAX_WIDTH,
+  BASE_TEXT_COLOR,
+  EASE_IN_OUT_QUART,
+} from "../../styles/.style"
 
 import myLabels from "../../documents/home"
+
+import WorkItem from "../atoms/WorkItem"
 
 const StyledSection = styled.div`
   padding: 6.4rem 0;
@@ -15,6 +22,52 @@ const StyledSection = styled.div`
     padding: 0 32px;
     width: 100%;
     max-width: ${MAX_WIDTH}px;
+
+    > a {
+      display: inline-block;
+      position: relative;
+      padding: 1.6rem 2.8rem;
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 0.16rem;
+      color: ${BASE_TEXT_COLOR};
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        display: inline-block;
+        vertical-align: middle;
+        height: 0.2rem;
+        border-radius: 1px;
+        transition: ${EASE_IN_OUT_QUART};
+      }
+
+      &::before {
+        width: 100%;
+        background: #d4b079;
+      }
+
+      &::after {
+        width: 0%;
+        background: #f03434;
+      }
+
+      &:hover {
+        &::before {
+          width: 0%;
+          transition: ${EASE_IN_OUT_QUART};
+        }
+
+        &::after {
+          width: 100%;
+          transition: ${EASE_IN_OUT_QUART};
+        }
+      }
+    }
   }
 `
 
@@ -24,61 +77,16 @@ const StyledContent = styled.div`
   margin-top: 8.2rem;
 `
 
-const StyledContentItem = styled.div`
-  display: inline-block;
-  position: relative;
-  margin-bottom: 6.4rem;
-  width: 100%;
-
-  img {
-    display: block;
-    width: 100%;
-  }
-`
-
-const StyledWorkInfo = styled.div`
-  p:nth-of-type(1) {
-    padding-top: 2rem;
-    font-family: ${MULI};
-    font-size: 1.4rem;
-    letter-spacing: 0.067rem;
-    line-height: 1;
-    color: ${BASE_TEXT_COLOR};
-  }
-
-  p:nth-of-type(2) {
-    padding-top: 1.2rem;
-    font-family: ${MULI};
-    font-size: 1.2rem;
-    letter-spacing: 0.04rem;
-    line-height: 1.4;
-    color: #717377;
-  }
-`
-
 const HomeWorksSection = ({ data }: any) => {
   return (
     <StyledSection>
       <div>
         <StyledContent>
           {data.map((item: any, index: number) => {
-            return (
-              <StyledContentItem key={index}>
-                {item.node.url !== undefined ? (
-                  <a href={item.node.url} target="_blank">
-                    <img src={item.node.image.url} alt="" />
-                  </a>
-                ) : (
-                  <img src={item.node.image.url} alt="" />
-                )}
-                <StyledWorkInfo>
-                  <p>{myLabels.works.label.replace("tag", item.node.tag)}</p>
-                  <p>{dayjs(item.node.publishedAt).format("YYYY/MM/DD")}</p>
-                </StyledWorkInfo>
-              </StyledContentItem>
-            )
+            return <WorkItem key={index} data={item.node}></WorkItem>
           })}
         </StyledContent>
+        <Link to="/works">{myLabels.button}</Link>
       </div>
     </StyledSection>
   )

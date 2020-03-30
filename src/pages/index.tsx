@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { WorksQuery } from "../../types/graphql-types"
+import { WorksSummaryQuery } from "../../types/graphql-types"
 const dayjs = require("dayjs")
 import styled from "styled-components"
 
@@ -11,7 +11,7 @@ import HomeAboutSection from "../components/organisms/HomeAbout"
 import HomeWorksSection from "../components/organisms/HomeWorks"
 
 type Props = {
-  data: WorksQuery
+  data: WorksSummaryQuery
 }
 
 interface IAll {
@@ -31,7 +31,7 @@ const IndexPage: React.FC<Props> = () => {
 
   const [allWork, setAllWork] = useState<IAll[]>([])
   const data = useStaticQuery(graphql`
-    query works {
+    query worksSummary {
       allMicrocmsWeb {
         edges {
           node {

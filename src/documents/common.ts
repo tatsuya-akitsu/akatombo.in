@@ -4,4 +4,5 @@ export default {
     { label: "じっせき", target: "/works", isBlank: false },
     { label: "きろく", target: "https://note.com/tombo_code", isBlank: true },
   ],
+  tag: "${tag}",
 }

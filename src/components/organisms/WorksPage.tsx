@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 const dayjs = require("dayjs")
 import styled from "styled-components"
 import { BASE_TEXT_COLOR, MULI } from "../../styles/.style"
+import WorkItem from "../atoms/WorkItem"
 
 import myLabels from "../../documents/works"
 
@@ -50,7 +51,9 @@ const WorksPage = ({ data }: any) => {
   })
 
   const handleGetWork = (val: string) => {
-    if (val === "web") {
+    if (val === "all") {
+      setState([...state, data.all])
+    } else if (val === "web") {
       setState([...state, data.web])
     } else if (val === "illustration") {
       setState([...state, data.illustration])
@@ -79,19 +82,9 @@ const WorksPage = ({ data }: any) => {
         </ul>
       </StyledTabs>
       <ul>
-        {state.map((item: any, index: number) => (
-          <div>
-            {item.node.url !== undefined ? (
-              <a href={item.node.url} target="_blank">
-                <img src={item.node.image.url} alt="" />
-              </a>
-            ) : (
-              <img src={item.node.image.url} alt="" />
-            )}
-            <p>{myLabels.label.replace("{tag}", item.node.tag)}</p>
-            <p>{dayjs(item.node.publishedAt).format("YYYY/MM/DD")}</p>
-          </div>
-        ))}
+        {state.map((item: any, index: number) => {
+          return <WorkItem key={index} data={item.node}></WorkItem>
+        })}
       </ul>
     </section>
   )
