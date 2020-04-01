@@ -36,6 +36,7 @@ const IndexPage: React.FC<Props> = () => {
             publishedAt
             tag
             url
+            title
           }
         }
       }
@@ -47,6 +48,7 @@ const IndexPage: React.FC<Props> = () => {
             }
             publishedAt
             tag
+            title
           }
         }
       }
@@ -58,6 +60,7 @@ const IndexPage: React.FC<Props> = () => {
             }
             tag
             publishedAt
+            title
           }
         }
       }

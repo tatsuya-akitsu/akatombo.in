@@ -19,7 +19,7 @@ const StyledSection = styled.div`
   > div {
     position: relative;
     margin: 0;
-    padding: 0 32px;
+    padding: 0 6.4rem;
     width: 100%;
     max-width: ${MAX_WIDTH}px;
 
@@ -73,7 +73,7 @@ const StyledSection = styled.div`
 
 const StyledContent = styled.div`
   column-count: 3;
-  column-gap: 3.2rem;
+  column-gap: 6.4rem;
   margin-top: 8.2rem;
 `
 

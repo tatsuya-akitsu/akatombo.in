@@ -31,6 +31,7 @@ const SecondPage: React.FC<Props> = () => {
             publishedAt
             tag
             url
+            title
           }
         }
       }
@@ -42,6 +43,7 @@ const SecondPage: React.FC<Props> = () => {
             }
             publishedAt
             tag
+            title
           }
         }
       }
@@ -53,6 +55,7 @@ const SecondPage: React.FC<Props> = () => {
             }
             tag
             publishedAt
+            title
           }
         }
       }
