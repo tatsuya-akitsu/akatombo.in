@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import styled from "styled-components"
 import { BASE_TEXT_COLOR, MULI } from "../../styles/.style"
 import WorkItem from "../atoms/WorkItem"
 
 import myLabels from "../../documents/works"
-
-interface IState {
-  state: Array<any>
-}
+import { RouteContext } from "../layout"
 
 const StyledTabs = styled.div`
   border-bottom: 1px solid ${BASE_TEXT_COLOR};
@@ -41,25 +38,19 @@ const StyledTabs = styled.div`
   }
 `
 
-const WorksPage = ({ data }: any) => {
-  const [state, setState] = useState<IState[]>([])
-
-  useEffect(() => {
-    setState(data.all)
-  }, [])
-
+const WorksPage = () => {
   const handleGetWork = (val: string) => {
-    if (val === "all") {
-      setState(data.all)
-    } else if (val === "web") {
-      setState(data.web)
-    } else if (val === "illustration") {
-      setState(data.illustration)
-    } else if (val === "graphic") {
-      setState(data.graphic)
-    } else if (val === "photograph") {
-      setState(data.photograph)
-    }
+    // if (val === "all") {
+    //   setState(data.all)
+    // } else if (val === "web") {
+    //   setState(data.web)
+    // } else if (val === "illustration") {
+    //   setState(data.illustration)
+    // } else if (val === "graphic") {
+    //   setState(data.graphic)
+    // } else if (val === "photograph") {
+    //   setState(data.photograph)
+    // }
   }
 
   return (
@@ -80,9 +71,13 @@ const WorksPage = ({ data }: any) => {
         </ul>
       </StyledTabs>
       <ul>
-        {state.map((item: any, index: number) => {
-          return <WorkItem key={index} data={item.node}></WorkItem>
-        })}
+        <RouteContext.Consumer>
+          {context =>
+            context.state?.all.map((item: any, index: number) => (
+              <WorkItem key={index} data={item.node}></WorkItem>
+            ))
+          }
+        </RouteContext.Consumer>
       </ul>
     </section>
   )

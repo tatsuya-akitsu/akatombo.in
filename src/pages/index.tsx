@@ -1,18 +1,12 @@
-import React, { useState, useEffect, useRef } from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import { WorksSummaryQuery } from "../../types/graphql-types"
-const dayjs = require("dayjs")
+import React, { useEffect, useRef } from "react"
 import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { RouteContext } from "../components/layout"
 import HomeIntroSection from "../components/organisms/HomeIntro"
 import HomeAboutSection from "../components/organisms/HomeAbout"
 import HomeWorksSection from "../components/organisms/HomeWorks"
-
-type Props = {
-  data: WorksSummaryQuery
-}
 
 const StyledBackground = styled.div`
   position: absolute;
@@ -22,76 +16,12 @@ const StyledBackground = styled.div`
   background: #fbfbfb;
 `
 
-const IndexPage: React.FC<Props> = () => {
+const IndexPage = () => {
   const backgroundEl = useRef<HTMLDivElement>(null)
-
-  const data = useStaticQuery(graphql`
-    query worksSummary {
-      allMicrocmsWeb {
-        edges {
-          node {
-            image {
-              url
-            }
-            publishedAt
-            tag
-            url
-            title
-          }
-        }
-      }
-      allMicrocmsIllustrator {
-        edges {
-          node {
-            image {
-              url
-            }
-            publishedAt
-            tag
-            title
-          }
-        }
-      }
-      allMicrocmsGraphic {
-        edges {
-          node {
-            image {
-              url
-            }
-            tag
-            publishedAt
-            title
-          }
-        }
-      }
-      allMicrocmsPhotograph {
-        edges {
-          node {
-            image {
-              url
-            }
-            publishedAt
-            tag
-          }
-        }
-      }
-    }
-  `)
-
-  const cmsData = data.allMicrocmsWeb.edges.concat(
-    data.allMicrocmsIllustrator.edges,
-    data.allMicrocmsGraphic.edges,
-    data.allMicrocmsPhotograph.edges
-  )
-  const sortData = [...cmsData].sort(
-    (a: any, b: any) => dayjs(b.node.publishedAt) - dayjs(a.node.publishedAt)
-  )
-  const initialState = sortData.slice(0, 12)
-  const [state, setState] = useState(initialState)
 
   useEffect(() => {
     if (backgroundEl && backgroundEl.current) {
-      backgroundEl.current.style.top = `${window.innerHeight + 256}px`
+      backgroundEl.current.style.top = `${window.innerHeight + 200}px`
       backgroundEl.current.style.height = `${window.innerHeight * 1.4}px`
     }
   })
@@ -101,7 +31,9 @@ const IndexPage: React.FC<Props> = () => {
       <HomeIntroSection />
       <StyledBackground ref={backgroundEl}></StyledBackground>
       <HomeAboutSection />
-      <HomeWorksSection data={state} />
+      <RouteContext.Consumer>
+        {context => <HomeWorksSection data={context.state}></HomeWorksSection>}
+      </RouteContext.Consumer>
     </Layout>
   )
 }
